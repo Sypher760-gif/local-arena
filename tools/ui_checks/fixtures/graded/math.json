@@ -1,0 +1,18 @@
+[
+  {
+    "id": "M-01",
+    "type": "Math",
+    "prompt": "What is 17 times 23? Reply with just the number. [[reply:391]]",
+    "check": "number",
+    "expected": "391",
+    "difficulty": "easy"
+  },
+  {
+    "id": "M-02",
+    "type": "Math",
+    "prompt": "What is 17 times 23? Reply with just the number. [[reply:381]]",
+    "check": "number",
+    "expected": "391",
+    "difficulty": "easy"
+  }
+]

@@ -1,0 +1,25 @@
+[
+  {
+    "id": "F-01",
+    "type": "Following instructions",
+    "prompt": "Reply with no more than 5 words, all in lower case. [[reply:THIS IS A VERY LONG UPPERCASE SENTENCE THAT BREAKS EVERY RULE]]",
+    "check": "rules",
+    "rules": [
+      { "kind": "maxWords", "n": 5 },
+      { "kind": "allLower" }
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "F-02",
+    "type": "Following instructions",
+    "prompt": "Reply with exactly two lines. The first line must start with Hello and the second line must end with today. [[reply:Goodbye world]]",
+    "check": "rules",
+    "rules": [
+      { "kind": "exactLines", "n": 2 },
+      { "kind": "startsWith", "value": "Hello" },
+      { "kind": "endsWith", "value": "today" }
+    ],
+    "difficulty": "hard"
+  }
+]

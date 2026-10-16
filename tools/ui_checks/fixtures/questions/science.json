@@ -1,0 +1,19 @@
+[
+  {
+    "id": "S-01",
+    "type": "Science",
+    "prompt": "Which gas do plants take in from the air for photosynthesis? Reply with just the name of the gas.",
+    "check": "exact",
+    "expected": "carbon dioxide",
+    "alt": ["co2", "carbon dioxide (co2)"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "S-02",
+    "type": "Science",
+    "prompt": "At sea level, at what temperature in Celsius does water boil? Reply with just the number.",
+    "check": "number",
+    "expected": "100",
+    "difficulty": "easy"
+  }
+]

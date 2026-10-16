@@ -1,0 +1,166 @@
+[
+  {
+    "id": "example-27b",
+    "name": "Example 27B",
+    "version": "64K fast coder · dflash2, the launcher's own settings",
+    "engine": "ninfer",
+    "contextTokens": 65536,
+    "matchId": "example-27b",
+    "matchContext": 65536,
+    "port": 8084,
+    "start": {
+      "script": "$FIXTURE/ninfer-launch.ps1",
+      "args": []
+    },
+    "stop": {
+      "script": "$FIXTURE/ninfer-launch.ps1",
+      "args": [
+        "-Stop"
+      ]
+    },
+    "note": "Fixture speed 100 tok/s."
+  },
+  {
+    "id": "example-27b-128k",
+    "name": "Example 27B",
+    "version": "128K · MTP profile",
+    "engine": "ninfer",
+    "contextTokens": 131072,
+    "matchId": "example-27b",
+    "matchContext": 131072,
+    "port": 8084,
+    "start": {
+      "script": "$FIXTURE/start-ninfer.ps1",
+      "args": [
+        "-Spec",
+        "mtp",
+        "-DraftTokens",
+        "4",
+        "-Context",
+        "131072",
+        "-GraphAllowanceMiB",
+        "0",
+        "-KvDtype",
+        "rk2v4-e8"
+      ]
+    },
+    "stop": {
+      "script": "$FIXTURE/ninfer-launch.ps1",
+      "args": [
+        "-Stop"
+      ]
+    }
+  },
+  {
+    "id": "example-27b-mtp",
+    "name": "Example Fast",
+    "version": "64K",
+    "engine": "llama.cpp",
+    "contextTokens": 65536,
+    "matchId": "example-27b-mtp",
+    "matchContext": 65536,
+    "port": 8081,
+    "portFile": "$FIXTURE/example-server.json",
+    "start": {
+      "script": "$FIXTURE/example-launch.ps1",
+      "args": [
+        "-Mode",
+        "fast-64k",
+        "-NoBrowser"
+      ]
+    }
+  },
+  {
+    "id": "example-27b-mtp-128k",
+    "name": "Example",
+    "version": "128K",
+    "engine": "llama.cpp",
+    "contextTokens": 131072,
+    "matchId": "example-27b-mtp",
+    "matchContext": 131072,
+    "port": 8081,
+    "portFile": "$FIXTURE/example-server.json",
+    "start": {
+      "script": "$FIXTURE/example-launch.ps1",
+      "args": [
+        "-Mode",
+        "long-128k",
+        "-NoBrowser"
+      ]
+    }
+  },
+  {
+    "id": "example-27b-ptq1_0",
+    "name": "Example",
+    "version": "256K",
+    "engine": "llama.cpp",
+    "contextTokens": 262144,
+    "matchId": "example-27b-ptq1_0",
+    "port": 8081,
+    "portFile": "$FIXTURE/example-server.json",
+    "start": {
+      "script": "$FIXTURE/example-launch.ps1",
+      "args": [
+        "-Mode",
+        "long-256k",
+        "-NoBrowser"
+      ]
+    }
+  },
+  {
+    "id": "example-next-iq3_xxs",
+    "name": "example-next",
+    "version": "IQ3_XXS",
+    "engine": "strata",
+    "contextTokens": 153600,
+    "configPath": "$FIXTURE/strata-iq3_xxs.json",
+    "matchId": "iq3_xxs",
+    "port": 8080
+  },
+  {
+    "id": "example-coder-iq1_m",
+    "name": "example-coder",
+    "version": "IQ1_M",
+    "engine": "strata",
+    "contextTokens": 262144,
+    "configPath": "$FIXTURE/strata-coder-iq1_m.json",
+    "matchId": "coder-iq1_m",
+    "port": 8080
+  },
+  {
+    "id": "example-vision-1b",
+    "name": "Example Vision",
+    "version": "1B (images)",
+    "engine": "llama.cpp",
+    "contextTokens": 65536,
+    "matchId": "example-vision-1b",
+    "port": 8083,
+    "portFile": "$FIXTURE/vision-1B-server.json",
+    "start": {
+      "script": "$FIXTURE/vision-launch.ps1",
+      "args": [
+        "-Size",
+        "1B",
+        "-NoOpen"
+      ]
+    }
+  },
+  {
+    "id": "example-vision-35b",
+    "name": "Example Vision",
+    "version": "35B-A3B (images)",
+    "engine": "llama.cpp",
+    "contextTokens": 65536,
+    "matchId": "example-vision-35b",
+    "port": 8082,
+    "portFile": "$FIXTURE/vision-35B-server.json",
+    "start": {
+      "script": "$FIXTURE/vision-launch.ps1",
+      "args": [
+        "-Size",
+        "35B",
+        "-NoOpen"
+      ]
+    }
+  }
+]

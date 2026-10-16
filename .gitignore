@@ -1,0 +1,31 @@
+# Raw inputs — large, often personal, usually re-downloadable. Never commit.
+data/
+/config/models.json
+/config/*.local.json
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Node
+node_modules/
+
+# OS noise
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Saved chats, votes, runs and the live record: personal, never commit.
+data/store/
+data/live/
+
+# Downloaded research inputs are not part of the release.
+docs/question-research/raw/*
+!docs/question-research/raw/README.md
+

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "L-01",
+    "type": "Logic",
+    "prompt": "All flurbs are blips. No blip is a glorp. Can a flurb be a glorp? Reply with just yes or no.",
+    "check": "exact",
+    "expected": "no",
+    "alt": ["no."],
+    "difficulty": "easy"
+  },
+  {
+    "id": "L-02",
+    "type": "Logic",
+    "prompt": "Three boxes are labelled Apples, Oranges and Mixed, and every label is wrong. You may open one box only. Which box do you open? Reply with just the label of the box you would open.",
+    "check": "exact",
+    "expected": "mixed",
+    "alt": ["the mixed box", "box mixed"],
+    "difficulty": "medium"
+  }
+]

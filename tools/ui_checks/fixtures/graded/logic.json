@@ -1,0 +1,19 @@
+[
+  {
+    "id": "L-01",
+    "type": "Logic",
+    "prompt": "All flurbs are blips. No blip is a glorp. Can a flurb be a glorp? Reply with just yes or no.",
+    "check": "exact",
+    "expected": "no",
+    "alt": ["no."],
+    "difficulty": "easy"
+  },
+  {
+    "id": "L-02",
+    "type": "Logic",
+    "prompt": "If some zeds are zaps and all zaps are zops, are some zeds zops? Reply with just yes or no.",
+    "check": "exact",
+    "expected": "yes",
+    "difficulty": "easy"
+  }
+]

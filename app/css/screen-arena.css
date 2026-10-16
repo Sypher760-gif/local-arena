@@ -1,0 +1,245 @@
+/* Arena screen: header strip, question, two answer modules, vote dock. */
+
+/* keep the hidden attribute working against the display rules below */
+.arena [hidden] { display: none !important; }
+
+.arena { flex: 1; display: flex; flex-direction: column; gap: var(--space-module-gap); min-height: 0; }
+
+/* header strip */
+.arena .arena-strip { padding: 0; display: flex; flex-direction: column; }
+.arena-top {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px;
+  padding: 10px 12px 10px 24px;
+  border-bottom: 1px solid var(--color-hairline-soft);
+}
+.arena-round-no {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0;
+  text-transform: none; color: var(--color-text);
+}
+.arena-record-wrap {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-mono); font-size: 12px;
+}
+.arena-count-a { color: var(--color-accent); }
+.arena-count-b { color: var(--color-compare); }
+.arena-count-tie { color: var(--color-text-tertiary); }
+.arena-record-note { font-family: var(--font-ui); font-size: 12px; color: var(--color-text-tertiary); }
+.arena-record {
+  display: flex; gap: 2px; width: 168px; height: 6px; border-radius: 3px;
+  background: var(--color-meter-track);
+}
+.arena-record > span { min-width: 0; border-radius: 3px; }
+.arena-record-a { background: var(--color-accent); }
+.arena-record-tie { background: #4a5056; }
+.arena-record-b { background: var(--color-compare); }
+.arena-check {
+  margin-left: auto; display: flex; align-items: center; gap: 8px;
+  min-height: 32px; font-size: 12px; color: var(--color-text-secondary); cursor: pointer;
+}
+.arena-check input { width: 15px; height: 15px; margin: 0; accent-color: var(--color-accent); }
+
+/* model picker */
+.arena-picker {
+  display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 16px;
+  padding: 12px 12px 14px 24px;
+  border-bottom: 1px solid var(--color-hairline-soft);
+}
+.arena-pick { display: flex; flex-direction: column; gap: 6px; }
+.arena-select {
+  min-width: min(260px, 100%); min-height: 32px; padding: 0 8px;
+  background: var(--color-well); color: var(--color-text);
+  border: 1px solid var(--color-control-border); border-radius: var(--radius-control);
+  font-family: var(--font-mono); font-size: 12px;
+}
+.arena-picker-note { flex: 1 1 260px; font-size: 12px; color: var(--color-text-secondary); }
+
+/* round options: categories, difficulty, rounds, thinking, answer checking */
+.arena-options {
+  display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 18px;
+  padding: 12px 12px 14px 24px; background: #0000001f;
+  border-bottom: 1px solid var(--color-hairline-soft);
+}
+.arena-opt { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.arena-opt-wide { flex: 1 1 420px; }
+.arena-opt-label {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--color-text-tertiary);
+}
+.arena-chip-wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.arena-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.arena-chip {
+  height: 30px; padding: 0 11px; border-radius: var(--radius-control);
+  background: transparent; color: var(--color-text-secondary);
+  border: 1px solid var(--color-control-border);
+  font: inherit; font-size: 12px; cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease), border-color var(--duration-fast) var(--ease);
+}
+.arena-chip:hover:not(:disabled) { color: var(--color-text); border-color: #ffffff3a; }
+.arena-chip.on { color: var(--color-ground); background: var(--color-text); border-color: var(--color-text); }
+.arena-chip:disabled { cursor: default; opacity: 0.5; }
+.arena-pool-note { font-family: var(--font-mono); font-size: 11px; color: var(--color-text-tertiary); }
+.arena-opt-select {
+  width: auto; min-height: 30px; height: 30px; padding: 0 28px 0 9px;
+  background: var(--color-well); color: var(--color-text);
+  border: 1px solid var(--color-control-border); border-radius: var(--radius-control);
+  font: inherit; font-size: 12px;
+}
+.arena-match-note { font-family: var(--font-mono); font-size: 12px; color: var(--color-text); }
+.arena-question-actions { display: flex; gap: 6px; align-items: center; margin-top: 22px; }
+.arena-source { font-family: var(--font-mono); }
+
+/* the answer check, shown after the vote */
+.arena-verdict {
+  display: flex; align-items: baseline; gap: 10px; margin: 0 24px 12px; padding: 8px 10px;
+  border-radius: var(--radius-control); font-size: 12px; color: var(--color-text-secondary);
+  background: var(--color-well);
+}
+.arena-verdict-mark { font-weight: 600; flex: none; }
+.arena-verdict.is-right { background: color-mix(in srgb, var(--color-ok) 9%, var(--color-well)); }
+.arena-verdict.is-right .arena-verdict-mark { color: var(--color-ok); }
+.arena-verdict.is-wrong { background: color-mix(in srgb, var(--color-bad) 9%, var(--color-well)); }
+.arena-verdict.is-wrong .arena-verdict-mark { color: var(--color-bad); }
+
+/* question */
+.arena-question {
+  display: flex; flex-wrap: wrap; align-items: flex-start; gap: 12px 24px;
+  padding: 20px 12px 22px 24px;
+}
+.arena-question-main { flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.arena-question-head { display: flex; align-items: center; gap: 10px; }
+.arena-tag {
+  padding: 1px 8px; background: var(--color-well);
+  border: 1px solid var(--color-hairline); border-radius: var(--radius-chip);
+  font-size: 11px; color: var(--color-text-secondary);
+}
+.arena-difficulty { font-size: 11px; color: var(--color-text-tertiary); }
+.arena-question-text {
+  max-width: 860px; font-size: 19px; line-height: 1.45; letter-spacing: -0.01em;
+}
+.arena-edit { display: flex; flex-direction: column; gap: 8px; max-width: 860px; }
+.arena-edit-input {
+  width: 100%; min-height: 72px; padding: 8px 10px;
+  background: var(--color-well); color: var(--color-text);
+  border: 1px solid var(--color-control-border); border-radius: var(--radius-control);
+  font: inherit; font-size: 16px; line-height: 1.45; resize: vertical;
+}
+.arena-edit-buttons { display: flex; gap: 8px; }
+
+/* instructions for each side (collapsed under the question) */
+.arena-instructions { padding: 0 24px 14px; border-bottom: 1px solid var(--color-hairline-soft); }
+.arena-system-summary { padding: 8px 0; font-size: 12px; color: var(--color-text-secondary); cursor: pointer; }
+.arena-system-note { margin: 0 0 12px; max-width: 720px; font-size: 12px; color: var(--color-text-tertiary); }
+.arena-system-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; max-width: 720px; font-size: 12px; color: var(--color-text-secondary); }
+.arena-system-input {
+  box-sizing: border-box; width: 100%; min-height: 56px; padding: 8px 10px;
+  background: var(--color-well); color: var(--color-text);
+  border: 1px solid var(--color-control-border); border-radius: var(--radius-control);
+  font: inherit; font-size: 13px; resize: vertical;
+}
+
+/* help line: what survives leaving the tab */
+.arena-help { margin: 0; padding: 0 12px 14px 24px; font-size: 12px; color: var(--color-text-tertiary); }
+
+/* an answer side's instructions, shown once the names are revealed */
+.arena-side-system {
+  margin: 0 24px 12px; padding: 8px 10px;
+  background: var(--color-well); border-radius: var(--radius-control);
+  font-size: 12px; color: var(--color-text-secondary);
+}
+
+/* answer modules */
+.arena-answers { flex: 1 1 auto; display: flex; flex-wrap: wrap; gap: var(--space-module-gap); min-height: 0; }
+.arena-side {
+  flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column;
+  background: var(--color-module);
+  border: 1px solid var(--color-hairline); border-radius: var(--radius-module);
+  box-shadow: inset 0 2px 0 var(--side-color);
+  overflow: hidden;
+}
+.arena-side-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; padding: 18px 24px 14px; }
+.arena-badge {
+  display: flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 8px;
+  background: color-mix(in srgb, var(--side-color) 16%, transparent);
+  color: var(--side-color); font-size: 14px; font-weight: 600;
+}
+.arena-pill {
+  padding: 2px 10px; border: 1px dashed #ffffff29; border-radius: 6px;
+  font-size: 12px; color: var(--color-text-secondary);
+}
+.arena-name { font-family: var(--font-mono); font-size: 13px; }
+.arena-version { color: var(--color-text-secondary); }
+.arena-status { font-size: 12px; color: var(--color-text-secondary); }
+.arena-side .arena-speed { margin-left: auto; gap: 8px; }
+.arena-side .readout-unit { padding-bottom: 0; font-size: 11px; }
+.arena-gauge {
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 0 24px 16px;
+  border-bottom: 1px solid var(--color-hairline-soft);
+}
+.arena-meter .seg-meter { height: 12px; }
+.arena-stats {
+  display: flex; flex-wrap: wrap; gap: 4px 16px;
+  font-family: var(--font-mono); font-size: 11px; color: var(--color-text-tertiary);
+}
+.arena-side > .notice { margin: 16px 24px 0; }
+/* what this side is doing: the phase line lives in .arena-status (work-phase classes come from
+   screen-chat.css), and the reasoning folds into a thought row under the gauge */
+.arena-icon { display: inline-flex; align-items: center; }
+.arena-thought { margin: 12px 24px 0; }
+.arena-thought:empty { display: none; }
+.arena-text {
+  flex: 1; max-width: 620px; padding: 22px 24px 24px;
+  font-size: 15px; line-height: 1.65; color: var(--color-text-body);
+  overflow-x: auto;
+}
+.arena-text-empty { color: var(--color-text-tertiary); }
+
+/* vote dock */
+.arena .arena-dock { padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
+.arena-votes { display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px; }
+.arena-vote {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 52px; padding: 0 14px;
+  background: var(--color-raised); color: var(--color-text);
+  border: 1px solid var(--color-control-border); border-radius: var(--radius-large-button);
+  font: inherit; font-size: 14px; font-weight: 500; cursor: pointer;
+}
+.arena-vote-a,
+.arena-vote-b { flex: 2 1 200px; font-size: 15px; font-weight: 600; }
+.arena-vote-tie,
+.arena-vote-bad { flex: 1 1 120px; }
+.arena-vote-a {
+  color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 9%, transparent);
+  border-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
+}
+.arena-vote-b {
+  color: var(--color-compare);
+  background: #7db4f017;
+  border-color: #7db4f073;
+}
+.arena-vote-a .keycap,
+.arena-vote-b .keycap { color: currentColor; border-color: currentColor; opacity: 0.75; }
+.arena-vote[aria-pressed="true"] .keycap { color: inherit; border-color: currentColor; }
+.arena-vote-a[aria-pressed="true"] { background: var(--color-accent); color: var(--color-on-accent); }
+.arena-vote-b[aria-pressed="true"] { background: var(--color-compare); color: var(--color-ground); }
+.arena-vote-tie[aria-pressed="true"],
+.arena-vote-bad[aria-pressed="true"] { background: var(--color-text); color: var(--color-ground); }
+.arena-vote:disabled { cursor: default; }
+.arena-vote:disabled:not([aria-pressed="true"]) { opacity: 0.45; }
+
+.arena-status-row {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 6px 12px; min-height: 34px; padding: 0 8px;
+  font-size: 12px; color: var(--color-text-secondary);
+}
+.arena-status-left { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.arena-note-strong { color: var(--color-text); }
+.arena-status-actions { display: flex; gap: 8px; margin-left: auto; }
+.arena-next { background: var(--color-text); color: var(--color-ground); border: 0; font-weight: 600; }
+
+/* narrow window: the two answers stack below 900 px */
+@media (max-width: 900px) {
+  .arena-answers > .arena-side { flex-basis: 100%; }
+}

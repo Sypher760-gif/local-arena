@@ -1,0 +1,66 @@
+/* Local Arena base: fonts, reset, body, focus rings, scrollbars */
+@font-face { font-family: "Geist"; font-weight: 400; font-style: normal; font-display: block; src: url("../fonts/geist-sans-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Geist"; font-weight: 500; font-style: normal; font-display: block; src: url("../fonts/geist-sans-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Geist"; font-weight: 600; font-style: normal; font-display: block; src: url("../fonts/geist-sans-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Geist Mono"; font-weight: 300; font-style: normal; font-display: block; src: url("../fonts/geist-mono-latin-300-normal.woff2") format("woff2"); }
+@font-face { font-family: "Geist Mono"; font-weight: 400; font-style: normal; font-display: block; src: url("../fonts/geist-mono-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Geist Mono"; font-weight: 500; font-style: normal; font-display: block; src: url("../fonts/geist-mono-latin-500-normal.woff2") format("woff2"); }
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+h1, h2, h3, p { margin: 0; }
+
+body {
+  background: var(--color-ground);
+  color: var(--color-text);
+  font-family: var(--font-ui);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Keyboard focus: a soft neutral ring on buttons and links. Text boxes and dropdowns draw no
+   ring at all; their border brightens instead (below). */
+a:focus-visible, button:focus-visible, [tabindex]:not([tabindex="-1"]):focus-visible {
+  outline: 1.5px solid color-mix(in srgb, var(--color-text) 55%, transparent) !important;
+  outline-offset: 2px;
+}
+input:focus, input:focus-visible, select:focus, select:focus-visible,
+textarea:focus, textarea:focus-visible { outline: none !important; }
+
+/* Fields everywhere: no spinner arrows, a quiet border that brightens on hover and focus. */
+input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), select, textarea {
+  transition: border-color var(--duration-fast) var(--ease), background-color var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease);
+}
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not(:disabled):hover,
+select:not(:disabled):hover, textarea:not(:disabled):hover { border-color: var(--color-field-hover) !important; }
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):focus,
+select:focus, textarea:focus {
+  border-color: var(--color-field-focus) !important;
+  box-shadow: 0 0 0 3px #ffffff0a;
+}
+/* Dropdowns: our own chevron instead of the system arrow. */
+select {
+  -webkit-appearance: none; appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M2 3.5 L5 6.5 L8 3.5' fill='none' stroke='%23a3a9a5' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 10px center !important;
+  padding-right: 28px !important;
+  cursor: pointer;
+}
+select:disabled { cursor: not-allowed; }
+select option { background: var(--color-raised); color: var(--color-text); }
+
+/* thin dark scrollbars */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--color-ground); }
+::-webkit-scrollbar-thumb { background: var(--color-meter-track); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: #3a3f44; }

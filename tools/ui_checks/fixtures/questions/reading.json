@@ -1,0 +1,18 @@
+[
+  {
+    "id": "R-01",
+    "type": "Reading",
+    "prompt": "Passage: The lighthouse keeper lit the lamp on Monday, Tuesday and Wednesday, but the storm cut the power on Thursday night. Question: On how many nights did the keeper light the lamp? Reply with just the number.",
+    "check": "number",
+    "expected": "3",
+    "difficulty": "medium"
+  },
+  {
+    "id": "R-02",
+    "type": "Reading",
+    "prompt": "Passage: Mina planted basil in April and mint in May. The mint grew faster, but the basil tasted stronger in her soup. Question: Which herb did Mina plant first? Reply with just the herb.",
+    "check": "exact",
+    "expected": "basil",
+    "difficulty": "easy"
+  }
+]

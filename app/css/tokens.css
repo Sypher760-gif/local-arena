@@ -1,0 +1,83 @@
+/* Local Arena design tokens: colour, type, spacing, radius and motion */
+:root {
+  /* colour */
+  --color-ground: #0b0c0d;
+  --color-module: #131517;
+  --color-raised: #1a1d20;
+  --color-selected: #1c1f22;
+  --color-nav-active: #25292d;
+  --color-well: #0e0f11;
+  --color-meter-track: #2a2e32;
+  --color-hairline: #ffffff12;
+  --color-hairline-soft: #ffffff0f;
+  --color-control-border: #ffffff14;
+  --color-top-highlight: #ffffff0a;
+  --color-text: #e9ebe8;
+  --color-text-body: #dcdfdc;
+  --color-text-secondary: #a3a9a5;
+  --color-text-tertiary: #7f8682;
+  --color-accent: #f2b155;
+  --color-on-accent: #17130a;
+  --color-compare: #7db4f0;
+  --color-neutral-series: #8a9299;
+  --color-ok: #7fd1ae;
+  --color-bad: #f0957a;
+  --color-keycap-border: #ffffff29;
+
+  /* font */
+  --font-ui: "Geist", system-ui, sans-serif;
+  --font-mono: "Geist Mono", monospace;
+  --font-size-base: 13px;
+  --line-height-base: 1.45;
+  --font-section-label: 10.5px;
+  --font-section-label-weight: 500;
+  --font-section-label-tracking: 0.12em;
+  --font-readout-hero: 68px;
+  --font-readout-large: 48px;
+  --font-readout-medium: 38px;
+  --font-body-chat: 14.5px;
+  --font-body-arena: 15px;
+  --font-meta: 11px;
+
+  /* radius */
+  --radius-module: 12px;
+  --radius-composer: 14px;
+  --radius-control: 8px;
+  --radius-button: 9px;
+  --radius-large-button: 10px;
+  --radius-nav-pill: 10px;
+  --radius-nav-item: 7px;
+  --radius-chip: 6px;
+
+  /* space */
+  --space-window-padding: 8px;
+  --space-module-gap: 8px;
+  --space-module-padding: 16px 24px;
+  --space-row-height: 54px;
+
+  /* elevation */
+  --elevation-module: 1px solid var(--color-hairline), inset 0 1px 0 var(--color-top-highlight);
+  --elevation-primary-button: inset 0 1px 0 #ffffff59, 0 4px 16px color-mix(in srgb, var(--color-accent) 25%, transparent);
+  --elevation-composer: 0 12px 32px #00000059;
+  --elevation-led: 0 0 8px currentColor;
+
+  /* meter */
+  --meter-segment: 3px;
+  --meter-gap: 2px;
+  --meter-mask: repeating-linear-gradient(90deg, #000 0 3px, transparent 3px 5px);
+  --meter-glow: drop-shadow(0 0 5px color-mix(in srgb, var(--color-accent) 50%, transparent));
+  --meter-peak-hold: 2px;
+  --meter-speed-scale: 0-60;
+
+  /* motion and pop-ups */
+  --ease: cubic-bezier(0.2, 0.6, 0.25, 1);
+  --ease-emphasized: cubic-bezier(0.16, 0.84, 0.32, 1);
+  --duration-instant: 100ms;
+  --duration-fast: 140ms;
+  --duration-base: 180ms;
+  --duration-slow: 240ms;
+  --shadow-pop: 0 12px 32px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.07);
+  --color-field: #101214;
+  --color-field-hover: #ffffff1f;
+  --color-field-focus: #ffffff4d;
+}

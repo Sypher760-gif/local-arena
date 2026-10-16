@@ -1,0 +1,19 @@
+[
+  {
+    "id": "C-01",
+    "type": "Coding",
+    "prompt": "In Python, what does len(\"hello\") return? Reply with just the number.",
+    "check": "number",
+    "expected": "5",
+    "difficulty": "easy"
+  },
+  {
+    "id": "C-02",
+    "type": "Coding",
+    "prompt": "In JavaScript, what does typeof null evaluate to? Reply with just the word.",
+    "check": "exact",
+    "expected": "object",
+    "alt": ["\"object\""],
+    "difficulty": "medium"
+  }
+]

@@ -1,0 +1,25 @@
+[
+  {
+    "id": "F-01",
+    "type": "Following instructions",
+    "prompt": "Reply with exactly two lines. The first line must start with Hello and the second line must end with today.",
+    "check": "rules",
+    "rules": [
+      { "kind": "exactLines", "n": 2 },
+      { "kind": "startsWith", "value": "Hello" },
+      { "kind": "endsWith", "value": "today" }
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "F-02",
+    "type": "Following instructions",
+    "prompt": "Reply with one short sentence of no more than 12 words, written entirely in lower case.",
+    "check": "rules",
+    "rules": [
+      { "kind": "maxWords", "n": 12 },
+      { "kind": "allLower" }
+    ],
+    "difficulty": "medium"
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "id": "M-01",
+    "type": "Math",
+    "prompt": "What is 17 times 23? Reply with just the number. [[empty]]",
+    "check": "number",
+    "expected": "391",
+    "difficulty": "easy"
+  }
+]

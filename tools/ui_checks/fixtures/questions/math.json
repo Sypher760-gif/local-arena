@@ -1,0 +1,19 @@
+[
+  {
+    "id": "M-01",
+    "type": "Math",
+    "prompt": "What is 17 times 23? Reply with just the number.",
+    "check": "number",
+    "expected": "391",
+    "difficulty": "easy"
+  },
+  {
+    "id": "M-02",
+    "type": "Math",
+    "prompt": "A shirt costs 24.50 and is discounted by 20 percent. What is the discounted price? Reply with just the number.",
+    "check": "number",
+    "expected": "19.6",
+    "tolerance": 0.01,
+    "difficulty": "medium"
+  }
+]
