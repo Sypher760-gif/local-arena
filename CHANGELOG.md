@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Fixed: after a short reply, the Chat speed peak and graph could read lower than the reply's own speed.
+
 ## 0.1.0
 
 First public release.
