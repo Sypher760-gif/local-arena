@@ -27,6 +27,18 @@ export async function run(t) {
   // The speed shown is over the first token to the last, and the wait for the first token is separate.
   t.assert(footer.includes("first token"), `reply footer is "${footer}", want the wait for the first token in it`);
   t.assert(/over \d+\.\d s/.test(footer), `reply footer is "${footer}", want the window the speed was measured over`);
+  // A short reply ends before the live meter catches up. After it, the peak is never below the
+  // reply's own speed in the big number.
+  const before = await t.count(".chat-msg-model");
+  await t.type(".chat-input", "[[reply:Hello! How can I help you today?]]");
+  await t.waitFor(`!document.querySelector(".chat-composer-bar .btn-primary").disabled`);
+  await t.click(".chat-composer-bar .btn-primary");
+  await t.waitFor(`document.querySelectorAll(".chat-msg-model").length > ${before}`, 30000);
+  await t.waitFor(`!document.querySelector(".chat-writing")`, 30000);
+  await new Promise((r) => setTimeout(r, 300));
+  const heroNow = Number(await t.eval(`parseFloat(document.querySelector(".readout-hero")?.textContent ?? "0")`));
+  const peakNow = Number(await t.eval(`parseFloat(document.querySelector(".peak-value").textContent)`));
+  t.assert(heroNow > 0 && peakNow >= heroNow - 0.05, `peak ${peakNow} is below the reply's speed ${heroNow}`);
 
   // Arena side readouts use tokens.
   await t.open("arena");

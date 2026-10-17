@@ -1459,6 +1459,19 @@ export function render(root) {
       session.meterTop = Math.max(session.meterTop, session.peak ?? 0);
       trend.redraw();
     }
+    // A short reply ends before the live meter catches up, so its samples read low. The reply's own
+    // speed is an average, and the fastest moment is at least that: lift its stretch of the graph and
+    // the peak to it, so the peak, the graph and the big number agree.
+    const final = detail.tokensPerSecond;
+    if (!detail.failed && Number.isFinite(final) && final > 0 && detail.startedAt) {
+      const own = session.speedHistory.filter((sample) => sample.t >= detail.startedAt);
+      const top = own.reduce((m, sample) => Math.max(m, sample.v), 0);
+      if (top > 0 && top < final) for (const sample of own) sample.v *= final / top;
+      else if (top === 0) trend.push(final);
+      session.peak = Math.max(session.peak ?? 0, final);
+      session.meterTop = Math.max(session.meterTop, session.peak);
+      trend.redraw();
+    }
     if (engine.mode !== "sim") saveChat(reply.conv);
     renderThread();
     refresh();
