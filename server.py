@@ -323,8 +323,16 @@ def entry_is_loaded(entry, engine_model, engine_ctx):
     if entry.get("engine") in ("external", "gguf") and match != engine_model:
         return False
     want = entry.get("matchContext")
-    if isinstance(want, int) and not isinstance(want, bool):
-        return engine_ctx == want
+    if isinstance(want, int) and not isinstance(want, bool) and engine_ctx != want:
+        return False
+    # Two Bonsai profiles can share the id and the context too (one chat, or two at once): the
+    # engine's slot count tells them apart. An engine that does not say is not held against it.
+    slots = entry.get("matchSlots")
+    if isinstance(slots, int) and not isinstance(slots, bool):
+        props = engine_json("/props")
+        have = props.get("total_slots") if isinstance(props, dict) else None
+        if isinstance(have, int) and not isinstance(have, bool) and have != slots:
+            return False
     return True
 
 
