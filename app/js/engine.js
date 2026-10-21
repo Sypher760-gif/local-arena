@@ -10,6 +10,7 @@ const FIT_TIGHT_LIMIT = 0.85;                // share of the card: below this th
 const FIT_SPILL_LIMIT = 1.0;                 // share of the card: above this the model spills
 const MIB_PER_GB = 1024;
 const TOKENS_PER_WORD = 1.33;
+const TOKEN_SCALE_KEY = "bench.tokenScale"; // each model's learned engine-tokens per estimated token
 const CHARS_PER_TOKEN = 4;   // fallback for a piece of text with no spaces at all
 const SAMPLE_MS = 100;       // speed sampler interval
 const WINDOW_S = 1;          // speed sampler window, seconds
@@ -23,6 +24,26 @@ const STATUS_TIMEOUT_MS = 4000;
 // first, characters when the piece has no spaces, never less than one token for real text. It is an
 // estimate for the live meter only: the finished reply is corrected against the engine's own usage.
 // Exported so the checks can hold this rule still: one streamed chunk is not one token.
+function savedTokenScale(modelId) {
+  try {
+    const value = JSON.parse(localStorage.getItem(TOKEN_SCALE_KEY) || "{}")[modelId];
+    return Number.isFinite(value) && value > 0.25 && value < 6 ? value : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveTokenScale(modelId, scale) {
+  if (!modelId) return;
+  try {
+    const all = JSON.parse(localStorage.getItem(TOKEN_SCALE_KEY) || "{}");
+    all[modelId] = Math.round(scale * 1000) / 1000;
+    localStorage.setItem(TOKEN_SCALE_KEY, JSON.stringify(all));
+  } catch {
+    // Storage full or blocked: the scale is still learned for this session.
+  }
+}
+
 export function estimateTokens(text) {
   const piece = String(text ?? "").trim();
   if (!piece) return 0;
@@ -106,6 +127,7 @@ class LiveEngine extends EventTarget {
     // markup hold far more tokens per word than prose, so the raw estimate ran low on them: the live
     // graph peaked under the reply's real speed. The live figure is scaled by this; 1 until learned.
     this._tokenScale = 1;
+    this._scaleModel = null;      // the model _tokenScale was loaded for
     this.replyTuning = {};        // the loaded model's own reply settings (Models > Settings), applied to every request
     this._tuningKey = null;       // which model and context replyTuning belongs to
     this._run = null;             // the reply in progress, or null
@@ -330,6 +352,11 @@ class LiveEngine extends EventTarget {
     this.reachable = info.reachable === true;
     this.kind = info.kind ?? null; // "strata" or "llama.cpp"; screens use it for the memory wording
     this.loadedModelId = this.reachable && info.model ? info.model : null;
+    // Each model keeps its learned token scale across sessions, so a new session's first reply reads right.
+    if (this.loadedModelId && this.loadedModelId !== this._scaleModel) {
+      this._scaleModel = this.loadedModelId;
+      this._tokenScale = savedTokenScale(this.loadedModelId) ?? 1;
+    }
     this.maxContext = this.reachable && info.maxContext ? info.maxContext : null;
     // Screens read maxContext from the model object, so carry the engine's figure on it.
     this.loadedModel = this.loadedModelId
@@ -587,6 +614,7 @@ class LiveEngine extends EventTarget {
     const tokenCorrection = ratio === null ? 1 : ratio / scaleUsed;
     if (ratio !== null && ratio > 0.25 && ratio < 6) {
       this._tokenScale = run.tokens >= 200 ? ratio : scaleUsed + (ratio - scaleUsed) * (run.tokens / 200);
+      saveTokenScale(this.loadedModelId, this._tokenScale);
     }
     this._conversation.words += words;
     this._conversation.tokens += tokens;

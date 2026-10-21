@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Fixed: the live tok/s meter read low for the whole first reply of a session on code-heavy answers. The correction the app learns from each finished reply is now saved per model, so a new session starts with it.
 - Fixed: after a short reply, the Chat speed peak and graph could read lower than the reply's own speed.
 
 ## 0.1.0
