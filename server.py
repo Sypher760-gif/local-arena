@@ -92,6 +92,7 @@ SWITCH_FAKE = os.environ.get("ARENA_SWITCH_FAKE") == "1"
 SWITCH_REAL = os.environ.get("ARENA_SWITCH_REAL") == "1"
 SWITCH_OFF = "Real model switching is switched off."
 SWITCH_TIMEOUT_S = 600.0
+LAUNCHER_GRACE_S = 90.0   # a launch script that exited 0 gets this long for its server to answer
 SWITCH_LOG = os.path.join(LIVE, "switch.log")
 SWITCH_STOP_DEFAULT_S = 12.0   # stop estimate until the first stop is measured
 SWITCH_START_DEFAULT_S = 60.0  # start estimate until that model's first start is measured
@@ -1005,6 +1006,7 @@ def run_switch(entry, warmup_seed=None):
         set_switch(state="starting", message="Loading %s." % name, startStartedAt=start_started)
         launcher.start(entry, switch_mode(), ENGINE_PORT, SWITCH_LOG)
         end = time.monotonic() + SWITCH_TIMEOUT_S
+        exited_at = None
         while time.monotonic() < end:
             if switch_mode() == "real":
                 # The model's own launcher knows its port, and writes it when it is up.
@@ -1026,9 +1028,17 @@ def run_switch(entry, warmup_seed=None):
             # says why in its log). When it has exited and nothing is answering, the load has failed:
             # say so now instead of leaving the progress bar close to done for ten minutes.
             finished, code = launcher.start_finished()
-            if finished and (code != 0 or launcher.direct_engine_started()) and not current_engine_model():
+            # Some launch scripts catch their own error and still exit 0 (NInfer's does, after it shows
+            # its message). A script that has exited with nothing answering after a short grace (room
+            # for a server it started detached to finish loading) has failed too.
+            if finished and exited_at is None:
+                exited_at = time.monotonic()
+            gave_up = finished and (code != 0 or launcher.direct_engine_started()
+                                    or time.monotonic() - exited_at > LAUNCHER_GRACE_S)
+            if gave_up and not current_engine_model():
                 set_switch(state="failed", finishedAt=time.time(), message=
-                           "%s did not start: its launcher stopped (exit %s) without the model answering. "
+                           "%s did not start: its launcher stopped (exit %s) without the model answering. A game or another "
+                           "program using the graphics card's memory is the usual cause. "
                            "The launcher's own message is in the switch log." % (name, code))
                 _switch_log_note("%s: launcher exited %s before the engine answered" % (name, code))
                 return
