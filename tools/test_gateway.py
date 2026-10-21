@@ -223,7 +223,7 @@ def check_status_up():
     expect(status == 200, "status %s" % status)
     expect(set(body) == {"gatewayVersion", "codeStamp", "engine", "live", "gpu", "time", "warmup"}, "top keys %s" % sorted(body))
     expect(body["warmup"] is None, "warmup before any warm-up probe: %r" % body["warmup"])
-    expect(body["gatewayVersion"] == "0.1.0", "gatewayVersion %r" % body["gatewayVersion"])
+    expect(body["gatewayVersion"] == "0.2.0", "gatewayVersion %r" % body["gatewayVersion"])
     eng = body["engine"]
     expect(set(eng) == {"reachable", "kind", "model", "maxContext", "version", "slots"}, "engine keys %s" % sorted(eng))
     expect(eng == {"reachable": True, "kind": "strata", "model": MODEL, "maxContext": 32768,

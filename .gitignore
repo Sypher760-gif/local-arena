@@ -1,5 +1,5 @@
 # Raw inputs — large, often personal, usually re-downloadable. Never commit.
-data/
+/data/
 /config/models.json
 /config/*.local.json
 .env

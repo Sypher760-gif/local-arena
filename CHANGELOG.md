@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+## 0.2.0
+
+- Fixed: the 704-question bank that Arena and Tests use was missing from the 0.1.0 download, because an ignore rule meant for personal data also matched `app/data/`. Arena could not start a round and Tests could not start a run.
 - Added: side chats. When the loaded model's engine can write more than one reply at once, a button in the Chat header opens another chat beside the main one. Each has its own conversation, and both answer at the same time. The "Send to Arena" header button is gone; it is still in each chat's right-click menu.
 - Fixed: the live tok/s meter read low for the whole first reply of a session on code-heavy answers. The correction the app learns from each finished reply is now saved per model, so a new session starts with it.
 - Fixed: after a short reply, the Chat speed peak and graph could read lower than the reply's own speed.

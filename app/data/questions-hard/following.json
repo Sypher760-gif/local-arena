@@ -1,0 +1,2808 @@
+[
+  {
+    "id": "following-ifeval-train-0001",
+    "type": "Following instructions",
+    "prompt": "I am planning a trip to Japan, and I would like thee to write an itinerary for my journey in a Shakespearean style. You are not allowed to use any commas in your response.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "excludes",
+        "value": ","
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 1,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "punctuation:no_comma"
+  },
+  {
+    "id": "following-ifeval-train-0004",
+    "type": "Following instructions",
+    "prompt": "Given the sentence \"Two young boys with toy guns and horns.\" can you ask a question? Please ensure that your response is in English, and in all lowercase letters. No capital letters are allowed.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allLower"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 4,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_lowercase"
+  },
+  {
+    "id": "following-ifeval-train-0008",
+    "type": "Following instructions",
+    "prompt": "Write a letter to a friend in all lowercase letters ask them to go and vote.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allLower"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 8,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_lowercase"
+  },
+  {
+    "id": "following-ifeval-train-0009",
+    "type": "Following instructions",
+    "prompt": "Write a long email template that invites a group of participants to a meeting, with at least 500 words. The email must include the keywords \"correlated\" and \"experiencing\" and should not use any commas.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "includes",
+        "value": "correlated"
+      },
+      {
+        "kind": "includes",
+        "value": "experiencing"
+      },
+      {
+        "kind": "minWords",
+        "n": 500
+      },
+      {
+        "kind": "excludes",
+        "value": ","
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 9,
+    "edits": [],
+    "notes": "Bench counts whitespace-separated words. IFEval counts \\\\w+ tokens.",
+    "source_difficulty": "keywords:existence, length_constraints:number_words, punctuation:no_comma"
+  },
+  {
+    "id": "following-ifeval-train-0010",
+    "type": "Following instructions",
+    "prompt": "Write a blog post with 400 or more words about the benefits of sleeping in a hammock.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "minWords",
+        "n": 400
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 10,
+    "edits": [],
+    "notes": "Bench counts whitespace-separated words. IFEval counts \\\\w+ tokens.",
+    "source_difficulty": "length_constraints:number_words"
+  },
+  {
+    "id": "following-ifeval-train-0011",
+    "type": "Following instructions",
+    "prompt": "Can you help me make an advertisement for a new product? It's a diaper that's designed to be more comfortable for babies and I want the entire output in JSON format.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "validJson"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 11,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "detectable_format:json_format"
+  },
+  {
+    "id": "following-ifeval-train-0013",
+    "type": "Following instructions",
+    "prompt": "Write a detailed review of the movie \"The Social Network\". Your entire response should be in English and all lower case (no capital letters whatsoever).",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allLower"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 13,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_lowercase"
+  },
+  {
+    "id": "following-ifeval-train-0014",
+    "type": "Following instructions",
+    "prompt": "Write a short blog post about a trip to Japan using less than 300 words.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "maxWords",
+        "n": 299
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 14,
+    "edits": [],
+    "notes": "Bench counts whitespace-separated words. IFEval counts \\\\w+ tokens.",
+    "source_difficulty": "length_constraints:number_words"
+  },
+  {
+    "id": "following-ifeval-train-0015",
+    "type": "Following instructions",
+    "prompt": "Please provide the names of 5 famous moms in JSON format. Please, use any interesting or weird tone. Your entire output should just contain a JSON block, nothing else.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "validJson"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 15,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "detectable_format:json_format"
+  },
+  {
+    "id": "following-ifeval-train-0021",
+    "type": "Following instructions",
+    "prompt": "Given the sentence \"It is unclear how much of this money is actually being spent on children\", is the sentiment positive or negative? The very last sentence of your response should be \"Is there anything else I can help with?\".",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "endsWith",
+        "value": "Is there anything else I can help with?"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 21,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:end_checker"
+  },
+  {
+    "id": "following-ifeval-train-0029",
+    "type": "Following instructions",
+    "prompt": "What are the advantages and disadvantages of having supernatural powers? Make it short. Wrap the entire output in JSON format. You can use markdown ticks such as ```.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "validJson"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 29,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "detectable_format:json_format"
+  },
+  {
+    "id": "following-ifeval-train-0032",
+    "type": "Following instructions",
+    "prompt": "Write a riddle for kids about auspices but make sure you don't use any commas.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "excludes",
+        "value": ","
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 32,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "punctuation:no_comma"
+  },
+  {
+    "id": "following-ifeval-train-0035",
+    "type": "Following instructions",
+    "prompt": "Can you give me two different formal alternatives to \"What's up? I'm going to the beach today\" and do not use any commas in your response.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "excludes",
+        "value": ","
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 35,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "punctuation:no_comma"
+  },
+  {
+    "id": "following-ifeval-train-0037",
+    "type": "Following instructions",
+    "prompt": "What sentiments existed in the Croatian and Serbian nations towards the Austrian Empire at the end of the 19th century? Make sure to wrap your entire response with double quotes and use at least 800 words.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "startsWith",
+        "value": "\""
+      },
+      {
+        "kind": "endsWith",
+        "value": "\""
+      },
+      {
+        "kind": "minWords",
+        "n": 800
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 37,
+    "edits": [],
+    "notes": "Bench counts whitespace-separated words. IFEval counts \\\\w+ tokens.",
+    "source_difficulty": "startend:quotation, length_constraints:number_words"
+  },
+  {
+    "id": "following-ifeval-train-0038",
+    "type": "Following instructions",
+    "prompt": "Write an ad copy for a new product, a digital photo frame that connects to your social media accounts and displays your photos. Respond with at most 150 words.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "maxWords",
+        "n": 150
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 38,
+    "edits": [],
+    "notes": "Bench counts whitespace-separated words. IFEval counts \\\\w+ tokens.",
+    "source_difficulty": "length_constraints:number_words"
+  },
+  {
+    "id": "following-ifeval-train-0040",
+    "type": "Following instructions",
+    "prompt": "Write a blog post about the history of the internet and how it has impacted our lives. Aim the blog post at teenagers and wrap your entire response with double quotation marks.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "startsWith",
+        "value": "\""
+      },
+      {
+        "kind": "endsWith",
+        "value": "\""
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 40,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:quotation"
+  },
+  {
+    "id": "following-ifeval-train-0041",
+    "type": "Following instructions",
+    "prompt": "Write a poem about two people who meet in a coffee shop and end your entire response with the exact phrase \"Is there anything else I can help with?\"",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "endsWith",
+        "value": "Is there anything else I can help with?"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 41,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:end_checker"
+  },
+  {
+    "id": "following-ifeval-train-0048",
+    "type": "Following instructions",
+    "prompt": "Write a poem that's at least 350 words about the beauty of eucalyptus trees and their many uses.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "minWords",
+        "n": 350
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 48,
+    "edits": [],
+    "notes": "Bench counts whitespace-separated words. IFEval counts \\\\w+ tokens.",
+    "source_difficulty": "length_constraints:number_words"
+  },
+  {
+    "id": "following-ifeval-train-0049",
+    "type": "Following instructions",
+    "prompt": "I have a dime. What can I do with this dime? Give me advice in the style of a President of the United States and make sure it has at least 600 words.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "minWords",
+        "n": 600
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 49,
+    "edits": [],
+    "notes": "Bench counts whitespace-separated words. IFEval counts \\\\w+ tokens.",
+    "source_difficulty": "length_constraints:number_words"
+  },
+  {
+    "id": "following-ifeval-train-0058",
+    "type": "Following instructions",
+    "prompt": "What is the history of NYC prospect park? Please wrap your entire answer in JSON format. You can use markdown ticks such as ```. For example:\n```JSON\n{\n...\n}\n```",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "validJson"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 58,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "detectable_format:json_format"
+  },
+  {
+    "id": "following-ifeval-train-0069",
+    "type": "Following instructions",
+    "prompt": "Compose song lyrics about a socio-economic problem. The song should be in English and in all lowercase letters.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allLower"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 69,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_lowercase"
+  },
+  {
+    "id": "following-ifeval-train-0084",
+    "type": "Following instructions",
+    "prompt": "Write an article about the reality of disability. Your article must end with the exact phrase \"Is there anything else I can help with?\". No other words should follow this phrase.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "endsWith",
+        "value": "Is there anything else I can help with?"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 84,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:end_checker"
+  },
+  {
+    "id": "following-ifeval-train-0091",
+    "type": "Following instructions",
+    "prompt": "Write a haiku about a lion that includes the keywords \"forests\" and \"riddle\". Refrain from using commas in your haiku.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "includes",
+        "value": "forests"
+      },
+      {
+        "kind": "includes",
+        "value": "riddle"
+      },
+      {
+        "kind": "excludes",
+        "value": ","
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 91,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "keywords:existence, punctuation:no_comma"
+  },
+  {
+    "id": "following-ifeval-train-0093",
+    "type": "Following instructions",
+    "prompt": "Write a five line poem about the time you had a binge watching episode. The poem should have a rhyme scheme of AABBA and include the word \"Netflix\". Your entire response should be in English, and should not contain any capital letters.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allLower"
+      },
+      {
+        "kind": "includes",
+        "value": "netflix"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 93,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_lowercase, keywords:existence"
+  },
+  {
+    "id": "following-ifeval-train-0095",
+    "type": "Following instructions",
+    "prompt": "Write an essay of at least 900 words on the topic of navigable freeway. Make sure the entire response is in English and no capital letters are used.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allLower"
+      },
+      {
+        "kind": "minWords",
+        "n": 900
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 95,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded. Bench counts whitespace-separated words. IFEval counts \\\\w+ tokens.",
+    "source_difficulty": "change_case:english_lowercase, length_constraints:number_words"
+  },
+  {
+    "id": "following-ifeval-train-0096",
+    "type": "Following instructions",
+    "prompt": "Come up with a proposal for a new research project on how to improve the quality of life for people with disabilities. Your response should be able to be rendered as HTML, and should include the keywords 'atlantis' and 'constable'.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "includes",
+        "value": "atlantis"
+      },
+      {
+        "kind": "includes",
+        "value": "constable"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 96,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "keywords:existence"
+  },
+  {
+    "id": "following-ifeval-train-0103",
+    "type": "Following instructions",
+    "prompt": "Write a song about regrets in the style of Taylor Swift. Please include explanations for the lyrics you write. Make sure your entire response is in English, and in all capital letters.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allUpper"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 103,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_capital"
+  },
+  {
+    "id": "following-ifeval-train-0109",
+    "type": "Following instructions",
+    "prompt": "Compose a poem all in lowercase letters about my friend Barnet.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allLower"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 109,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_lowercase"
+  },
+  {
+    "id": "following-ifeval-train-0119",
+    "type": "Following instructions",
+    "prompt": "Write a short essay about the updates of the latest episode of your favorite TV show. Use less than 300 words.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "maxWords",
+        "n": 299
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 119,
+    "edits": [],
+    "notes": "Bench counts whitespace-separated words. IFEval counts \\\\w+ tokens.",
+    "source_difficulty": "length_constraints:number_words"
+  },
+  {
+    "id": "following-ifeval-train-0120",
+    "type": "Following instructions",
+    "prompt": "\"Coincidence is God's way of remaining anonymous.\" What are your thoughts on this quote? Please do not use commas in your response. Answer with more than 800 words.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "excludes",
+        "value": ","
+      },
+      {
+        "kind": "minWords",
+        "n": 801
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 120,
+    "edits": [],
+    "notes": "Bench counts whitespace-separated words. IFEval counts \\\\w+ tokens.",
+    "source_difficulty": "punctuation:no_comma, length_constraints:number_words"
+  },
+  {
+    "id": "following-ifeval-train-0122",
+    "type": "Following instructions",
+    "prompt": "Create a riddle about the name Sheldon using only 10 words. Make sure to only use capital letters in your entire response.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allUpper"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 122,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_capital"
+  },
+  {
+    "id": "following-ifeval-train-0126",
+    "type": "Following instructions",
+    "prompt": "Create a resume for a 20-year-old college student with no work experience. Include the keywords \"Python\" and \"Java\" and wrap the response with double quotation marks.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "startsWith",
+        "value": "\""
+      },
+      {
+        "kind": "endsWith",
+        "value": "\""
+      },
+      {
+        "kind": "includes",
+        "value": "python"
+      },
+      {
+        "kind": "includes",
+        "value": "java"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 126,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:quotation, keywords:existence"
+  },
+  {
+    "id": "following-ifeval-train-0127",
+    "type": "Following instructions",
+    "prompt": "I'm a 12th grader and I need some help with my college applications, can you give me some advice? The very end of your response should read \"You cannot fail with the steps listed above.\" No other words should follow this phrase.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "endsWith",
+        "value": "You cannot fail with the steps listed above."
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 127,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:end_checker"
+  },
+  {
+    "id": "following-ifeval-train-0128",
+    "type": "Following instructions",
+    "prompt": "Can you write me an essay about the history of Martin Van Buren's presidency? Make sure that it's in English and not a single letter in your entire response is capitalized whatsoever.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allLower"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 128,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_lowercase"
+  },
+  {
+    "id": "following-ifeval-train-0139",
+    "type": "Following instructions",
+    "prompt": "What is the next number in this series: 1, 4, 7, 11, 17? Please answer with only mathematical notation without any commas.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "excludes",
+        "value": ","
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 139,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "punctuation:no_comma"
+  },
+  {
+    "id": "following-ifeval-train-0144",
+    "type": "Following instructions",
+    "prompt": "The Jimenez family has 20 members. Each member has at least one pet. If there are 32 pets in total, what is the maximum number of members that can possibly have 3 pets? Solve this step by step, and wrap your entire response (reasoning process and the final answer) with double quotation marks.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "startsWith",
+        "value": "\""
+      },
+      {
+        "kind": "endsWith",
+        "value": "\""
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 144,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:quotation"
+  },
+  {
+    "id": "following-ifeval-train-0145",
+    "type": "Following instructions",
+    "prompt": "Write an itinerary for a trip to a grocery store in Lima to buy some local goods. Make the itinerary funny, write it in all capital letters and include the keywords 'DISGUSTING', 'DELICIOUS', 'BAD', and 'GOOD'.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allUpper"
+      },
+      {
+        "kind": "includes",
+        "value": "disgusting"
+      },
+      {
+        "kind": "includes",
+        "value": "delicious"
+      },
+      {
+        "kind": "includes",
+        "value": "bad"
+      },
+      {
+        "kind": "includes",
+        "value": "good"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 145,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_capital, keywords:existence"
+  },
+  {
+    "id": "following-ifeval-train-0146",
+    "type": "Following instructions",
+    "prompt": "Hallucinate a resume for a glass artist in Adelaide. Make sure the resume is in English and all lowercase. The resume should have at least 800 words.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "minWords",
+        "n": 800
+      },
+      {
+        "kind": "allLower"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 146,
+    "edits": [],
+    "notes": "Bench counts whitespace-separated words. IFEval counts \\\\w+ tokens. The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "length_constraints:number_words, change_case:english_lowercase"
+  },
+  {
+    "id": "following-ifeval-train-0152",
+    "type": "Following instructions",
+    "prompt": "I want to write a reflective essay on how my life has changed since I started college. Do you have any recommendation? Please reply in English and capitalize all your words. Control the length of your reply. I don't want anything longer than 30 words.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allUpper"
+      },
+      {
+        "kind": "maxWords",
+        "n": 30
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 152,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded. Bench counts whitespace-separated words. IFEval counts \\\\w+ tokens.",
+    "source_difficulty": "change_case:english_capital, length_constraints:number_words"
+  },
+  {
+    "id": "following-ifeval-train-0157",
+    "type": "Following instructions",
+    "prompt": "Create an English name for a luxury real estate company that sells beachfront homes. All letters in your response must be lower case letters. Also, please put double quotation marks around your entire response.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allLower"
+      },
+      {
+        "kind": "startsWith",
+        "value": "\""
+      },
+      {
+        "kind": "endsWith",
+        "value": "\""
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 157,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_lowercase, startend:quotation"
+  },
+  {
+    "id": "following-ifeval-train-0165",
+    "type": "Following instructions",
+    "prompt": "Write a strange rap song about Alexander the Great becoming the king of Macedon. Finish the song with:\n\nPeace!\n\nNo additional words should follow \"Peace!\"",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "endsWith",
+        "value": "Peace!"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 165,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:end_checker"
+  },
+  {
+    "id": "following-ifeval-train-0167",
+    "type": "Following instructions",
+    "prompt": "Create a blog post for professionals in the field of computer science in the form of a funny riddle. Your entire reply should contain 600 to 700 words.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "minWords",
+        "n": 600
+      },
+      {
+        "kind": "maxWords",
+        "n": 700
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 167,
+    "edits": [],
+    "notes": "Bench counts whitespace-separated words. IFEval counts \\\\w+ tokens.",
+    "source_difficulty": "length_constraints:number_words, length_constraints:number_words"
+  },
+  {
+    "id": "following-ifeval-train-0168",
+    "type": "Following instructions",
+    "prompt": "How can I learn to code? Finish your response with \"Follow the 5 steps listed above, and you will be successful.\" No other words should follow this.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "endsWith",
+        "value": "Follow the 5 steps listed above, and you will be successful."
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 168,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:end_checker"
+  },
+  {
+    "id": "following-ifeval-train-0176",
+    "type": "Following instructions",
+    "prompt": "I'm a new puppy owner and I'm looking for some advice on how to train my puppy. Can you help me? Give me a few options. In particular, I need you to end your response with \"Which one you choose?\".",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "endsWith",
+        "value": "Which one you choose?"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 176,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:end_checker"
+  },
+  {
+    "id": "following-ifeval-train-0184",
+    "type": "Following instructions",
+    "prompt": "Generate a summary of the following passage in all capital letters:\n\nWorld War II or the Second World War, often abbreviated as WWII or WW2, was a global conflict that lasted from 1939 to 1945. The vast majority of the world's countries, including all of the great powers, fought as part of two opposing military alliances: the Allies and the Axis. Many participants threw their economic, industrial, and scientific capabilities behind this total war, blurring the distinction between civilian and military resources. Aircraft played a major role, enabling the strategic bombing of population centres and the delivery of the only two nuclear weapons ever used in war. World War II was by far the deadliest conflict in history, resulting in an estimated 70 to 85 million fatalities, mostly among civilians. Tens of millions died due to genocides (including the Holocaust), starvation, massacres, and disease. In the wake of Axis defeat, Germany, Austria and Japan were occupied, and war crimes tribunals were conducted against German and Japanese leaders.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allUpper"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 184,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_capital"
+  },
+  {
+    "id": "following-ifeval-train-0186",
+    "type": "Following instructions",
+    "prompt": "Write a review of IBM's 1956 chess program. Make sure your entire response is wrapped in double quotation marks.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "startsWith",
+        "value": "\""
+      },
+      {
+        "kind": "endsWith",
+        "value": "\""
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 186,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:quotation"
+  },
+  {
+    "id": "following-ifeval-train-0187",
+    "type": "Following instructions",
+    "prompt": "Invent a funny tagline for a local comedy show, and put your whole response in double quotes.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "startsWith",
+        "value": "\""
+      },
+      {
+        "kind": "endsWith",
+        "value": "\""
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 187,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:quotation"
+  },
+  {
+    "id": "following-ifeval-train-0188",
+    "type": "Following instructions",
+    "prompt": "What is another word for Engravings? Answer in lowercase letters only, throughout your entire answer.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allLower"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 188,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_lowercase"
+  },
+  {
+    "id": "following-ifeval-train-0195",
+    "type": "Following instructions",
+    "prompt": "A psychologist is a professional who examines people's behaviors and mental processes. Can you tell me more about psychologists? Answer in 100 to 120 words.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "minWords",
+        "n": 100
+      },
+      {
+        "kind": "maxWords",
+        "n": 120
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 195,
+    "edits": [],
+    "notes": "Bench counts whitespace-separated words. IFEval counts \\\\w+ tokens.",
+    "source_difficulty": "length_constraints:number_words, length_constraints:number_words"
+  },
+  {
+    "id": "following-ifeval-train-0200",
+    "type": "Following instructions",
+    "prompt": "Write a blog post about the best way to get a good night's sleep with at least 400 words.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "minWords",
+        "n": 400
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 200,
+    "edits": [],
+    "notes": "Bench counts whitespace-separated words. IFEval counts \\\\w+ tokens.",
+    "source_difficulty": "length_constraints:number_words"
+  },
+  {
+    "id": "following-ifeval-train-0214",
+    "type": "Following instructions",
+    "prompt": "Do you think Kareena Kapoor is a good actor? Wrap your response with double quotation marks.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "startsWith",
+        "value": "\""
+      },
+      {
+        "kind": "endsWith",
+        "value": "\""
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 214,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:quotation"
+  },
+  {
+    "id": "following-ifeval-train-0218",
+    "type": "Following instructions",
+    "prompt": "Write an academic proposal to a customer who's interested in implementing a new feature for their product. Put double quotes around your entire response.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "startsWith",
+        "value": "\""
+      },
+      {
+        "kind": "endsWith",
+        "value": "\""
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 218,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:quotation"
+  },
+  {
+    "id": "following-ifeval-train-0224",
+    "type": "Following instructions",
+    "prompt": "Rewrite the sentence: \"I flung my hatred into the burning fire.\" Put your entire response in double quotation marks.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "startsWith",
+        "value": "\""
+      },
+      {
+        "kind": "endsWith",
+        "value": "\""
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 224,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:quotation"
+  },
+  {
+    "id": "following-ifeval-train-0225",
+    "type": "Following instructions",
+    "prompt": "Who built the first artificial ice rink? Please include the keys (1) Name (2) Location and (3) Year. Use less than 150 words.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "maxWords",
+        "n": 149
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 225,
+    "edits": [],
+    "notes": "Bench counts whitespace-separated words. IFEval counts \\\\w+ tokens.",
+    "source_difficulty": "length_constraints:number_words"
+  },
+  {
+    "id": "following-ifeval-train-0226",
+    "type": "Following instructions",
+    "prompt": "I AM EASY TO GET INTO BUT HARD TO GET OUT OF. I AM INVITING AND EXCITING BUT MANY PEOPLE ARE AFRAID OF ME. I AM WHERE YOU NEED TO BE BUT YOU MAY NOT WANT TO STAY THERE. I MAY BE A MYSTERY BUT I AM SURE YOU CAN GUESS ME. WHAT AM I? Please do not use any commas in your response.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "excludes",
+        "value": ","
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 226,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "punctuation:no_comma"
+  },
+  {
+    "id": "following-ifeval-train-0228",
+    "type": "Following instructions",
+    "prompt": "Write an essay about Alvin and the Chipmunks in English and in all capital letters.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allUpper"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 228,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_capital"
+  },
+  {
+    "id": "following-ifeval-train-0233",
+    "type": "Following instructions",
+    "prompt": "What is multivariate analysis? Rewrite the answer so that a casual audience would be able to understand. Please end your response with \"Is there anything else I can help with?\" and no other words should follow this statement.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "endsWith",
+        "value": "Is there anything else I can help with?"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 233,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:end_checker"
+  },
+  {
+    "id": "following-ifeval-train-0244",
+    "type": "Following instructions",
+    "prompt": "Why are there 396 calories in a serving of 32 grams of unsalted almonds? Do not use commas in your response.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "excludes",
+        "value": ","
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 244,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "punctuation:no_comma"
+  },
+  {
+    "id": "following-ifeval-train-0246",
+    "type": "Following instructions",
+    "prompt": "Write a funny advertisement for a hair salon that is offering a 25% discount on all services that has at least 200 words.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "minWords",
+        "n": 200
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 246,
+    "edits": [],
+    "notes": "Bench counts whitespace-separated words. IFEval counts \\\\w+ tokens.",
+    "source_difficulty": "length_constraints:number_words"
+  },
+  {
+    "id": "following-ifeval-train-0247",
+    "type": "Following instructions",
+    "prompt": "Write a riddle about a mom laying out on a beach in Humboldt without using any commas.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "excludes",
+        "value": ","
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 247,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "punctuation:no_comma"
+  },
+  {
+    "id": "following-ifeval-train-0250",
+    "type": "Following instructions",
+    "prompt": "Is praying for someone's health a good idea? Your answer must be in all capital letters and in English.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allUpper"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 250,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_capital"
+  },
+  {
+    "id": "following-ifeval-train-0257",
+    "type": "Following instructions",
+    "prompt": "Write a project proposal for how to use machine learning and AI to improve the quality of education in developing countries. In your response, do not use any commas.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "excludes",
+        "value": ","
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 257,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "punctuation:no_comma"
+  },
+  {
+    "id": "following-ifeval-train-0262",
+    "type": "Following instructions",
+    "prompt": "What's the best way to get to the train station? Answer using a casual tone and markdown. Your response should be at least 300 words and in all lowercase letters.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "minWords",
+        "n": 300
+      },
+      {
+        "kind": "allLower"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 262,
+    "edits": [],
+    "notes": "Bench counts whitespace-separated words. IFEval counts \\\\w+ tokens. The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "length_constraints:number_words, change_case:english_lowercase"
+  },
+  {
+    "id": "following-ifeval-train-0266",
+    "type": "Following instructions",
+    "prompt": "Give me a poem about California. The very end of your entire response should read exactly like: your love, and thanks.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "endsWith",
+        "value": "your love, and thanks."
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 266,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:end_checker"
+  },
+  {
+    "id": "following-ifeval-train-0267",
+    "type": "Following instructions",
+    "prompt": "The Legend of the Sword and the Fairy is a movie in which Wan Wan is a villain. Write a story about Wan Wan's character in list format. Your entire response should be in English and in all capital letters.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allUpper"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 267,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_capital"
+  },
+  {
+    "id": "following-ifeval-train-0269",
+    "type": "Following instructions",
+    "prompt": "Radcliffe was the only one who could get past the guards. What could be said about him? Please wrap your entire response in JSON format. Markdown ticks (```) are acceptable.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "validJson"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 269,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "detectable_format:json_format"
+  },
+  {
+    "id": "following-ifeval-train-0271",
+    "type": "Following instructions",
+    "prompt": "Answer the following math problem in a different language, use bullet points, and give alternative answers. Refrain from using commas in your response. Natalia was buying books for her children. She bought 2 books for $24 each, and 3 books for $36 each. How much did she pay in total?",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "excludes",
+        "value": ","
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 271,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "punctuation:no_comma"
+  },
+  {
+    "id": "following-ifeval-train-0276",
+    "type": "Following instructions",
+    "prompt": "Write a speech-like paragraph on the US elections. Make sure to wrap your entire response with double quotation marks.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "startsWith",
+        "value": "\""
+      },
+      {
+        "kind": "endsWith",
+        "value": "\""
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 276,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:quotation"
+  },
+  {
+    "id": "following-ifeval-train-0285",
+    "type": "Following instructions",
+    "prompt": "Write a TLDR for the recent conflict between ISIL and the US in conversational bullet points. End your response with this exact phrase: \"Let me know if you have additional questions.\", and no other words should follow this phrase.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "endsWith",
+        "value": "Let me know if you have additional questions."
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 285,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:end_checker"
+  },
+  {
+    "id": "following-ifeval-train-0287",
+    "type": "Following instructions",
+    "prompt": "Please rewrite the following sentence in a serious tone, similar to the president of the united states, and without an upward bias or inflation alarmism. Please also include the keywords \"ink\" and \"memoirs\" in the sentence: \"The main points to consider are the following: First, the ECB’s own forecasts, which currently have a strong upward bias, must be revised downwards. Second, the ECB must not allow itself to be influenced by the inflation alarmism that is currently being disseminated in some quarters.\"",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "includes",
+        "value": "ink"
+      },
+      {
+        "kind": "includes",
+        "value": "memoirs"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 287,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "keywords:existence"
+  },
+  {
+    "id": "following-ifeval-train-0289",
+    "type": "Following instructions",
+    "prompt": "Improve the following text, which is about how to learn a language. Also, provide two alternatives. The text is: \"The best way to learn about a new culture is by living in it. Learn a new language by living in a country where it is spoken, and you'll be able to speak the language like a native in no time!\". Finish your response with \"Is there anything else I can help with?\". No other words should follow this phrase.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "endsWith",
+        "value": "Is there anything else I can help with?"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 289,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:end_checker"
+  },
+  {
+    "id": "following-ifeval-train-0292",
+    "type": "Following instructions",
+    "prompt": "Write a professional haiku in English for moms about an inspirational chorus teacher. It should include the phrase \"singing is life\" and be in all lowercase letters. No capital letters are allowed.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allLower"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 292,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_lowercase"
+  },
+  {
+    "id": "following-ifeval-train-0293",
+    "type": "Following instructions",
+    "prompt": "Create a product description for a product that will help me to stop snoring. Use all lowercase letters.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allLower"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 293,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_lowercase"
+  },
+  {
+    "id": "following-ifeval-train-0294",
+    "type": "Following instructions",
+    "prompt": "Write an email to your friend about what triggers you. Make sure to wrap the entire email in double quotation marks.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "startsWith",
+        "value": "\""
+      },
+      {
+        "kind": "endsWith",
+        "value": "\""
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 294,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:quotation"
+  },
+  {
+    "id": "following-ifeval-train-0297",
+    "type": "Following instructions",
+    "prompt": "Rewrite the following text so that it is funny to software engineers using notations from the book \"The C Programming Language\": \"The use of the various constructions described in this chapter is one of the most distinctive features of the C programming language.\" Make this sound like it is being said by the president of the United States and capitalize every letter.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allUpper"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 297,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_capital"
+  },
+  {
+    "id": "following-ifeval-train-0298",
+    "type": "Following instructions",
+    "prompt": "Write a blog post about how to train a dog that is geared towards kids. Include the keywords \"finale\" and \"less\" in the post.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "includes",
+        "value": "finale"
+      },
+      {
+        "kind": "includes",
+        "value": "less"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 298,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "keywords:existence"
+  },
+  {
+    "id": "following-ifeval-train-0305",
+    "type": "Following instructions",
+    "prompt": "I want you to act like a DnD dungeon master. I will be the sole player. Create a random class character sheet for me. Wrap the entire output in JSON format using markdown ticks. Include keywords 'medalist' and 'theta' in the response.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "validJson"
+      },
+      {
+        "kind": "includes",
+        "value": "medalist"
+      },
+      {
+        "kind": "includes",
+        "value": "theta"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 305,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "detectable_format:json_format, keywords:existence"
+  },
+  {
+    "id": "following-ifeval-train-0307",
+    "type": "Following instructions",
+    "prompt": "Write a very short resume for a refinery operator who has 5 years of experience working in the chemical industry. Include the keywords \"friends\" and \"hanson\" in the resume. Make your entire output contain less than 50 words.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "includes",
+        "value": "friends"
+      },
+      {
+        "kind": "includes",
+        "value": "hanson"
+      },
+      {
+        "kind": "maxWords",
+        "n": 49
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 307,
+    "edits": [],
+    "notes": "Bench counts whitespace-separated words. IFEval counts \\\\w+ tokens.",
+    "source_difficulty": "keywords:existence, length_constraints:number_words"
+  },
+  {
+    "id": "following-ifeval-train-0308",
+    "type": "Following instructions",
+    "prompt": "Write a limerick about a Zelda fan named Rodney. Make sure to include these items: Zelda, Hyrule, Link, Ganon. Use less than 100 words.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "includes",
+        "value": "zelda"
+      },
+      {
+        "kind": "includes",
+        "value": "hyrule"
+      },
+      {
+        "kind": "includes",
+        "value": "link"
+      },
+      {
+        "kind": "includes",
+        "value": "ganon"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 308,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "keywords:existence"
+  },
+  {
+    "id": "following-ifeval-train-0317",
+    "type": "Following instructions",
+    "prompt": "Write a tweet for the president of the United States. The tweet should include the keywords \"engages\" and \"lightly\".",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "includes",
+        "value": "engages"
+      },
+      {
+        "kind": "includes",
+        "value": "lightly"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 317,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "keywords:existence"
+  },
+  {
+    "id": "following-ifeval-train-0320",
+    "type": "Following instructions",
+    "prompt": "Write a limerick about a guy named Dave that is funny to moms. The limerick should end with the phrase \"Yes Mom, I am Dave.\" Do not say anything after the limerick.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "endsWith",
+        "value": "Yes Mom, I am Dave."
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 320,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:end_checker"
+  },
+  {
+    "id": "following-ifeval-train-0323",
+    "type": "Following instructions",
+    "prompt": "Write a cover letter for a job in Ventura that is funny and would be enjoyed by someone named Darius, wrap the entire response in double quotation marks.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "startsWith",
+        "value": "\""
+      },
+      {
+        "kind": "endsWith",
+        "value": "\""
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 323,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:quotation"
+  },
+  {
+    "id": "following-ifeval-train-0328",
+    "type": "Following instructions",
+    "prompt": "Write a song about the benefits of eating your vegetables. Please make sure it is in English and that all of the letters are lowercase.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allLower"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 328,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_lowercase"
+  },
+  {
+    "id": "following-ifeval-train-0329",
+    "type": "Following instructions",
+    "prompt": "Write a rant about how an asteroid killed the dinosaurs in all capital letters and in English. End the rant with the phrase \"What would happen to human next?\" and no other words should follow this phrase.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allUpper"
+      },
+      {
+        "kind": "endsWith",
+        "value": "What would happen to human next?"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 329,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_capital, startend:end_checker"
+  },
+  {
+    "id": "following-ifeval-train-0332",
+    "type": "Following instructions",
+    "prompt": "Write a description for the Pixel 3A smartphone with at least 400 words. Wrap your entire response with double quotation marks.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "minWords",
+        "n": 400
+      },
+      {
+        "kind": "startsWith",
+        "value": "\""
+      },
+      {
+        "kind": "endsWith",
+        "value": "\""
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 332,
+    "edits": [],
+    "notes": "Bench counts whitespace-separated words. IFEval counts \\\\w+ tokens.",
+    "source_difficulty": "length_constraints:number_words, startend:quotation"
+  },
+  {
+    "id": "following-ifeval-train-0343",
+    "type": "Following instructions",
+    "prompt": "Write a list of the top 10 facts about the UK without using commas.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "excludes",
+        "value": ","
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 343,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "punctuation:no_comma"
+  },
+  {
+    "id": "following-ifeval-train-0346",
+    "type": "Following instructions",
+    "prompt": "Write a joke about xml with a setup and a punchline. Wrap your entire response in double quotation marks.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "startsWith",
+        "value": "\""
+      },
+      {
+        "kind": "endsWith",
+        "value": "\""
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 346,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:quotation"
+  },
+  {
+    "id": "following-ifeval-train-0348",
+    "type": "Following instructions",
+    "prompt": "Write a startup pitch for \"Ward and Guerre\". Make it a weird poem that explains why the pitch is good. It should be in English and have no capital letters.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allLower"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 348,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_lowercase"
+  },
+  {
+    "id": "following-ifeval-train-0350",
+    "type": "Following instructions",
+    "prompt": "How can you get to know someone on a deep level in a romantic relationship? The answer should involve the topic of vulnerability. Do not use any commas in your response.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "excludes",
+        "value": ","
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 350,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "punctuation:no_comma"
+  },
+  {
+    "id": "following-ifeval-train-0352",
+    "type": "Following instructions",
+    "prompt": "Why did the man travel from Saskatoon to Helsinki to buy a piano? Wrap your entire response in double quotes.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "startsWith",
+        "value": "\""
+      },
+      {
+        "kind": "endsWith",
+        "value": "\""
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 352,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:quotation"
+  },
+  {
+    "id": "following-ifeval-train-0357",
+    "type": "Following instructions",
+    "prompt": "Write a rubric for performance review of a software engineer and wrap the entire output in JSON format. You can use markdown ticks such as ```.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "validJson"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 357,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "detectable_format:json_format"
+  },
+  {
+    "id": "following-ifeval-train-0383",
+    "type": "Following instructions",
+    "prompt": "Why do you think Google engineers stay at Google more often than moving to Microsoft? Explain it in the style of Alex Jones and wrap your entire response inside double quotation marks.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "startsWith",
+        "value": "\""
+      },
+      {
+        "kind": "endsWith",
+        "value": "\""
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 383,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:quotation"
+  },
+  {
+    "id": "following-ifeval-train-0385",
+    "type": "Following instructions",
+    "prompt": "What are the common signs and symptoms of abdominal and pelvic dissemination of ovarian cancer? Please answer in lower case letters. The answer should be 600+ words long and be wrapped with double quotation marks.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "startsWith",
+        "value": "\""
+      },
+      {
+        "kind": "endsWith",
+        "value": "\""
+      },
+      {
+        "kind": "minWords",
+        "n": 600
+      },
+      {
+        "kind": "startsWith",
+        "value": "\""
+      },
+      {
+        "kind": "endsWith",
+        "value": "\""
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 385,
+    "edits": [],
+    "notes": "Bench counts whitespace-separated words. IFEval counts \\\\w+ tokens.",
+    "source_difficulty": "startend:quotation, length_constraints:number_words, startend:quotation"
+  },
+  {
+    "id": "following-ifeval-train-0386",
+    "type": "Following instructions",
+    "prompt": "Please provide a short, funny list of ways to pass time at work. End with the exact phrase Is there anything else I can help with?",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "endsWith",
+        "value": "Is there anything else I can help with?"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 386,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:end_checker"
+  },
+  {
+    "id": "following-ifeval-train-0391",
+    "type": "Following instructions",
+    "prompt": "Write a poem about the top 20 tallest buildings in the world and their heights. End your response with the exact question: Is there anything else I can help with?",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "endsWith",
+        "value": "Is there anything else I can help with?"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 391,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:end_checker"
+  },
+  {
+    "id": "following-ifeval-train-0397",
+    "type": "Following instructions",
+    "prompt": "Write a funny letter to 6th graders at your school in list format. The letter should be about something important to you and you should end your entire response with the phrase \"Is there anything else I can help with?\"",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "endsWith",
+        "value": "Is there anything else I can help with?"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 397,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:end_checker"
+  },
+  {
+    "id": "following-ifeval-train-0399",
+    "type": "Following instructions",
+    "prompt": "Write a weird and short haiku about the state of Gujarat in India. Don't use any commas in your entire response. End your response with the EXACT phrase of \"in India.\"",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "excludes",
+        "value": ","
+      },
+      {
+        "kind": "endsWith",
+        "value": "in India."
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 399,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "punctuation:no_comma, startend:end_checker"
+  },
+  {
+    "id": "following-ifeval-train-0409",
+    "type": "Following instructions",
+    "prompt": "What's the difference between a 2-stroke and a 4-stroke motor? Your entire response must be in English and contain only lowercase letters.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allLower"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 409,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_lowercase"
+  },
+  {
+    "id": "following-ifeval-train-0410",
+    "type": "Following instructions",
+    "prompt": "I have been trying to get a refund for a product I bought online, but the company is refusing to return my money. Can you help me write a letter to them? I want the letter to include the words trust, brand, customer, law, policy, and unusable.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "includes",
+        "value": "trust"
+      },
+      {
+        "kind": "includes",
+        "value": "brand"
+      },
+      {
+        "kind": "includes",
+        "value": "customer"
+      },
+      {
+        "kind": "includes",
+        "value": "law"
+      },
+      {
+        "kind": "includes",
+        "value": "policy"
+      },
+      {
+        "kind": "includes",
+        "value": "unusable"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 410,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "keywords:existence"
+  },
+  {
+    "id": "following-ifeval-train-0412",
+    "type": "Following instructions",
+    "prompt": "Write an article about how intra-team conflict affected sports teams. Write in a crazy coach screaming style. Use all capital letters to express the craziness. Basically, not a single word in your entire reply should contain lowercase letters.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allUpper"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 412,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_capital"
+  },
+  {
+    "id": "following-ifeval-train-0416",
+    "type": "Following instructions",
+    "prompt": "Write a cover letter for a job and end with exactly \"Call me at 631-481-4867\"\nNo other words should follow that phrase.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "endsWith",
+        "value": "Call me at 631-481-4867"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 416,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:end_checker"
+  },
+  {
+    "id": "following-ifeval-train-0417",
+    "type": "Following instructions",
+    "prompt": "Write a limerick about writing a limerick. Don't use any commas in your entire reply.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "excludes",
+        "value": ","
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 417,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "punctuation:no_comma"
+  },
+  {
+    "id": "following-ifeval-train-0418",
+    "type": "Following instructions",
+    "prompt": "May name is Naomi. Write a blog post in my name for the canucks hockey team about why they need to be more mindful about their environments. End the blog post with \"Naomi thanks you for reading.\" No other words should follow this phrase. This phrase should be the very end of your entire response.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "endsWith",
+        "value": "Naomi thanks you for reading."
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 418,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:end_checker"
+  },
+  {
+    "id": "following-ifeval-train-0419",
+    "type": "Following instructions",
+    "prompt": "Write an essay about the reasons why slavery was abolished in the United States as if you are the president of the United States. Do not use any commas in your response. Your response should be in English, and in all capital letters.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "excludes",
+        "value": ","
+      },
+      {
+        "kind": "allUpper"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 419,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "punctuation:no_comma, change_case:english_capital"
+  },
+  {
+    "id": "following-ifeval-train-0420",
+    "type": "Following instructions",
+    "prompt": "Compose a startup pitch on a new app called Tipperary that helps people to find the average tip size for each restaurant. Please make the response strongly structured. Wrap your entire output in JSON format.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "validJson"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 420,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "detectable_format:json_format"
+  },
+  {
+    "id": "following-ifeval-train-0423",
+    "type": "Following instructions",
+    "prompt": "List all facts about Lionel Messi in a structured output. In particular, Format your entire output in JSON.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "validJson"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 423,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "detectable_format:json_format"
+  },
+  {
+    "id": "following-ifeval-train-0441",
+    "type": "Following instructions",
+    "prompt": "Rewrite the sentence \"A bust of a man with a beard and mustache.\" in a more sophisticated way. Do not use commas in your response.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "excludes",
+        "value": ","
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 441,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "punctuation:no_comma"
+  },
+  {
+    "id": "following-ifeval-train-0456",
+    "type": "Following instructions",
+    "prompt": "Write a riddle about embroidery that has the answer \"needle\". Include keywords 'afternoon' and 'distressed' in the response. Don't use any commas in your answer.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "includes",
+        "value": "afternoon"
+      },
+      {
+        "kind": "includes",
+        "value": "distressed"
+      },
+      {
+        "kind": "excludes",
+        "value": ","
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 456,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "keywords:existence, punctuation:no_comma"
+  },
+  {
+    "id": "following-ifeval-train-0457",
+    "type": "Following instructions",
+    "prompt": "create a job description for a clifford blu employee who works at the cash register, and also monitors the shelves for stock level. Use the keyword 'people' and 'skills'. use only lowercase letters.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allLower"
+      },
+      {
+        "kind": "includes",
+        "value": "people"
+      },
+      {
+        "kind": "includes",
+        "value": "skills"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 457,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_lowercase, keywords:existence"
+  },
+  {
+    "id": "following-ifeval-train-0465",
+    "type": "Following instructions",
+    "prompt": "Write a story about a family that goes camping in the woods. Your entire response should be in English and in all capital letters.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allUpper"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 465,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_capital"
+  },
+  {
+    "id": "following-ifeval-train-0466",
+    "type": "Following instructions",
+    "prompt": "Write an essay on the differences between Sunni and Shi'a Muslims. Your entire response must contain at least 1200 words.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "minWords",
+        "n": 1200
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 466,
+    "edits": [],
+    "notes": "Bench counts whitespace-separated words. IFEval counts \\\\w+ tokens.",
+    "source_difficulty": "length_constraints:number_words"
+  },
+  {
+    "id": "following-ifeval-train-0469",
+    "type": "Following instructions",
+    "prompt": "Give me a 300+ word startup pitch for a company that provides a service that creates trusts for people online.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "minWords",
+        "n": 300
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 469,
+    "edits": [],
+    "notes": "Bench counts whitespace-separated words. IFEval counts \\\\w+ tokens.",
+    "source_difficulty": "length_constraints:number_words"
+  },
+  {
+    "id": "following-ifeval-train-0471",
+    "type": "Following instructions",
+    "prompt": "Write an HTML page that lists 25 limericks about people named \"Bill\". The page should include keywords 'economist', 'bill', and 'jurgen'",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "includes",
+        "value": "bill"
+      },
+      {
+        "kind": "includes",
+        "value": "economist"
+      },
+      {
+        "kind": "includes",
+        "value": "jurgen"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 471,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "keywords:existence"
+  },
+  {
+    "id": "following-ifeval-train-0486",
+    "type": "Following instructions",
+    "prompt": "Could you please give me the pros and cons of working abroad wrapped in JSON format. Please make sure that your response only contains a JSON block. Please also make sure to include keywords 'compensated' and 'immigrants' in the response.",
+    "check": "rules",
+    "difficulty": "hard",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "validJson"
+      },
+      {
+        "kind": "includes",
+        "value": "compensated"
+      },
+      {
+        "kind": "includes",
+        "value": "immigrants"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 486,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "detectable_format:json_format, keywords:existence"
+  },
+  {
+    "id": "following-ifeval-train-0488",
+    "type": "Following instructions",
+    "prompt": "Write a song about innovation with a positive tone that is appealing to teenagers. Put your entire response in double quotation marks.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "startsWith",
+        "value": "\""
+      },
+      {
+        "kind": "endsWith",
+        "value": "\""
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 488,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "startend:quotation"
+  },
+  {
+    "id": "following-ifeval-train-0490",
+    "type": "Following instructions",
+    "prompt": "critique this startup pitch: Stephenson and Hong Kong will be the first-ever digital marketplace where users can buy and sell products from all over the world Stephenson and Hong Kong will be a onestopshop for all of your shopping needs and we will offer a variety of features that will make shopping online easier and more convenient than ever before. Do not use any commas in your response.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "excludes",
+        "value": ","
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 490,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "punctuation:no_comma"
+  },
+  {
+    "id": "following-ifeval-train-0498",
+    "type": "Following instructions",
+    "prompt": "Brainstorm a name for a company that collects and analyzes public transportation fares. The response should be in English, and in all capital letters.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allUpper"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 498,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_capital"
+  },
+  {
+    "id": "following-ifeval-train-0502",
+    "type": "Following instructions",
+    "prompt": "Write a riddle about Camilla that doesn't use commas.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "excludes",
+        "value": ","
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 502,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "punctuation:no_comma"
+  },
+  {
+    "id": "following-ifeval-train-0503",
+    "type": "Following instructions",
+    "prompt": "Come up with 3 names for a 2B software company. Make sure your names are in English and all capital letters.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allUpper"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 503,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_capital"
+  },
+  {
+    "id": "following-ifeval-train-0508",
+    "type": "Following instructions",
+    "prompt": "Write a song about how to make a peanut butter and jelly sandwich. Do not use commas in your response.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "excludes",
+        "value": ","
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 508,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "punctuation:no_comma"
+  },
+  {
+    "id": "following-ifeval-train-0519",
+    "type": "Following instructions",
+    "prompt": "Given the sentence \"The dog barked at the cat, but the cat ignored it because the\". Can you finish the sentence? Make sure that words in your entire response are in all lowercase letters.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "allLower"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 519,
+    "edits": [],
+    "notes": "The English-language half of this IFEval check is not graded.",
+    "source_difficulty": "change_case:english_lowercase"
+  },
+  {
+    "id": "following-ifeval-train-0526",
+    "type": "Following instructions",
+    "prompt": "What are the best things to do in Rochester, New York? Can you write them as a song and use music notation in your response? Make sure to include the keywords 'festival' and 'river'.",
+    "check": "rules",
+    "difficulty": "medium",
+    "source": "IFEval",
+    "rules": [
+      {
+        "kind": "includes",
+        "value": "festival"
+      },
+      {
+        "kind": "includes",
+        "value": "river"
+      }
+    ],
+    "source_url": "https://huggingface.co/datasets/google/IFEval/resolve/main/ifeval_input_data.jsonl",
+    "licence": "Apache-2.0",
+    "split": "train",
+    "source_row": 526,
+    "edits": [],
+    "notes": "",
+    "source_difficulty": "keywords:existence"
+  }
+]

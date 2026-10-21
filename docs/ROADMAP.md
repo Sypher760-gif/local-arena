@@ -1,6 +1,6 @@
 # Roadmap
 
-Version 0.1.0 covers Chat, Arena, Tests, Models (loading, connecting and per-model settings), saved records and demo mode.
+Version 0.2.0 covers Chat, Arena, Tests, Models (loading, connecting and per-model settings), saved records and demo mode.
 
 Planned for later versions:
 

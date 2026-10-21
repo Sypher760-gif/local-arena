@@ -18,7 +18,7 @@ import threading
 import time
 from http.server import BaseHTTPRequestHandler, SimpleHTTPRequestHandler
 
-VERSION = "0.1.0"
+VERSION = "0.2.0"
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "tools"))
 import launcher  # noqa: E402

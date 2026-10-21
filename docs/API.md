@@ -1,6 +1,6 @@
 # Gateway API (contract)
 
-Served by `server.py` on `http://127.0.0.1:8790`. All JSON is UTF-8. Errors are `{"error": "<plain sentence>"}` with a non-2xx status. Version: `0.1.0`.
+Served by `server.py` on `http://127.0.0.1:8790`. All JSON is UTF-8. Errors are `{"error": "<plain sentence>"}` with a non-2xx status. Version: `0.2.0`.
 
 Engine address: `127.0.0.1:8080` by default; override with env `ARENA_ENGINE` (for example `127.0.0.1:8766` for a fake engine). Gateway port: `8790` by default; override with env `ARENA_PORT`. Both are read once at start. Tests must never use 8790 or 8080: they run on spare ports (see `docs/TESTING.md`).
 
@@ -14,7 +14,7 @@ One cheap call the browser polls (every 1 s while streaming, every 3 s idle). Ne
 
 ```json
 {
-  "gatewayVersion": "0.1.0",
+  "gatewayVersion": "0.2.0",
   "engine": {
     "reachable": true,
     "kind": "strata",

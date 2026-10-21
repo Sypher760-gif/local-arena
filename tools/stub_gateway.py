@@ -77,7 +77,7 @@ class Handler(BaseHTTPRequestHandler):
             info.update(kind="llama.cpp", maxContext=(props.get("default_generation_settings") or {}).get("n_ctx"),
                         slots=props.get("total_slots"))
             live["state"] = "generating" if any(s.get("is_processing") for s in slots) else "idle"
-        return {"gatewayVersion": "0.1.0", "engine": info, "live": live, "gpu": GPU, "time": time.time()}
+        return {"gatewayVersion": "0.2.0", "engine": info, "live": live, "gpu": GPU, "time": time.time()}
 
     def _proxy(self):
         length = int(self.headers.get("Content-Length") or 0)
