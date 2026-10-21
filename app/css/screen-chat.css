@@ -50,6 +50,18 @@
 .chat-title { margin-right: 8px; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
 .chat-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .chat-thread-head .btn { margin-left: auto; }
+/* The middle column: the main thread, then any side chats, side by side. */
+.chat-thread-area { display: flex; gap: var(--space-module-gap); min-width: 0; min-height: 0; }
+.chat-thread-area > .chat-thread { flex: 1 1 0; }
+.chat-side .chat-messages { max-width: none; padding: 20px 18px; }
+.chat-side .chat-composer-wrap { padding: 0 14px 14px; }
+/* With side chats open the main composer is narrower: drop the word count so its buttons stay on one row. */
+.chat-thread-area.has-sides .chat-count { display: none; }
+.chat-thread-area.has-sides .chat-stop { margin-left: auto; }
+.chat-thread-area.has-sides .chat-composer-bar { flex-wrap: nowrap; }
+.chat-thread-area.has-sides .chat-composer-bar .btn { white-space: nowrap; }
+.chat-split, .chat-side-close { padding: 4px 7px; border-color: transparent; }
+.chat-split:not(:disabled):hover, .chat-side-close:hover { border-color: var(--color-hairline); color: var(--color-text); }
 .chat-thread-head .btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
 .chat-scroll { flex: 1; min-height: 0; overflow-y: auto; }
@@ -284,6 +296,7 @@
 @media (max-width: 900px) {
   .chat-screen { height: auto; }
   .chat-list, .chat-thread, .meters { flex: 1 1 100%; max-width: 100%; }
+  .chat-thread-area { flex: 1 1 100%; flex-direction: column; }
   .chat-rows { max-height: 260px; }
   .chat-thread { min-height: 70vh; }
   .chat-scroll { min-height: 50vh; }

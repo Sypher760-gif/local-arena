@@ -55,7 +55,7 @@ class Handler(BaseHTTPRequestHandler):
             metrics_future = pool.submit(self._engine_get, "/metrics")
             listed_future = pool.submit(self._engine_get, "/v1/models")
             metrics, listed = metrics_future.result(), listed_future.result()
-        info = {"reachable": False, "kind": None, "model": None, "maxContext": None, "version": None}
+        info = {"reachable": False, "kind": None, "model": None, "maxContext": None, "version": None, "slots": None}
         live = {"state": None, "phase": None, "promptRead": None, "promptTotal": None,
                 "generated": None, "tokS": None, "tokSMean": None}
         if metrics is not None or listed is not None:
@@ -74,7 +74,8 @@ class Handler(BaseHTTPRequestHandler):
         elif listed is not None:
             props = self._engine_get("/props") or {}
             slots = self._engine_get("/slots") or []
-            info.update(kind="llama.cpp", maxContext=(props.get("default_generation_settings") or {}).get("n_ctx"))
+            info.update(kind="llama.cpp", maxContext=(props.get("default_generation_settings") or {}).get("n_ctx"),
+                        slots=props.get("total_slots"))
             live["state"] = "generating" if any(s.get("is_processing") for s in slots) else "idle"
         return {"gatewayVersion": "0.1.0", "engine": info, "live": live, "gpu": GPU, "time": time.time()}
 

@@ -133,6 +133,7 @@ const session = {
   meterModel: null,
   stick: true,   // follow the newest text in the thread
   loaded: false, // live mode: saved chats have been read from the store
+  sideIds: [],   // chats open in side panels beside the main one
 };
 
 if (engine.mode !== "sim") {
@@ -349,6 +350,9 @@ function modelBody(msg) {
   return body;
 }
 
+const SPLIT_ICON = '<svg width="14" height="14" viewBox="0 0 14 14"><rect x="1.5" y="2.5" width="11" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M7 2.5v9" stroke="currentColor" stroke-width="1.3"/><path d="M9 7h2M10 6v2" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>';
+const CLOSE_ICON = '<svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 2 L8 8 M8 2 L2 8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>';
+const wordCountOf = (text) => String(text ?? "").split(/\s+/).filter(Boolean).length;
 const BRAIN_ICON = '<svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 2.5c-.8-1.3-3-1.3-3.7.1-1.5.1-2.1 1.9-1.1 3-1 1.1-.4 2.8 1.2 2.9.5 1.4 2.4 1.5 3.6.7 1.2.8 3.1.7 3.6-.7 1.6-.1 2.2-1.8 1.2-2.9 1-1.1.4-2.9-1.1-3-.7-1.4-2.9-1.4-3.7-.1z" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/><path d="M6 2.7v6.4" fill="none" stroke="currentColor" stroke-width="1.1"/></svg>';
 const CHEVRON_ICON = '<svg width="10" height="10" viewBox="0 0 10 10"><path d="M2.5 4 L5 6.5 L7.5 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
@@ -562,6 +566,7 @@ export function render(root) {
   input.value = session.draft;
   const count = el("span", "chat-count");
   const stop = button({ kind: "secondary", text: "Stop", onClick: () => engine.stop() });
+  stop.classList.add("chat-stop");
   stop.prepend(icon('<svg width="8" height="8" viewBox="0 0 8 8"><rect width="8" height="8" rx="2" fill="currentColor"/></svg>'));
   const send = button({ kind: "primary", text: "Send", onClick: sendDraft });
   send.append(icon('<svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 10 V2 M2.5 5.5 L6 2 L9.5 5.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'));
@@ -579,9 +584,12 @@ export function render(root) {
   // Thread (centre) -----------------------------------------------------------
   const title = el("h1", "chat-title");
   const chips = el("div", "chat-chips");
-  const arenaButton = button({ kind: "secondary", small: true, text: "Send to Arena", onClick: sendToArena });
+  const splitButton = button({ kind: "ghost", small: true, onClick: openSideChat });
+  splitButton.classList.add("chat-split");
+  splitButton.setAttribute("aria-label", "Open a side chat");
+  splitButton.append(icon(SPLIT_ICON));
   const head = el("div", "chat-thread-head");
-  head.append(title, chips, arenaButton);
+  head.append(title, chips, splitButton);
   const scroller = el("div", "chat-scroll");
   const messages = el("div", "chat-messages");
   scroller.append(messages);
@@ -665,7 +673,10 @@ export function render(root) {
   const cols = el("div", "chat-cols chat-screen");
   const listHandle = sideHandle("list", "Conversations");
   const metersHandle = sideHandle("meters", "Live meters");
-  cols.append(list, listHandle, thread, metersHandle, meters);
+  // The main thread and any side chats share the middle column.
+  const threadArea = el("div", "chat-thread-area");
+  threadArea.append(thread);
+  cols.append(list, listHandle, threadArea, metersHandle, meters);
   root.append(cols);
   applyLayout();
 
@@ -901,6 +912,7 @@ export function render(root) {
     stop.disabled = !streaming;
     banner.hidden = !(engine.mode !== "sim" && engine.reachable === false);
     updateDraft();
+    updateSides();
   }
 
   // Sidebar: right-click a chat (or press the menu key on it) for Rename, Pin, Duplicate,
@@ -1013,6 +1025,7 @@ export function render(root) {
     if (index < 0) return;
     const wasActive = session.activeId === conv.id;
     if (wasActive && session.reply?.conv === conv) engine.stop();
+    if (sidePanes.has(conv.id)) dropSide(conv.id);
     session.conversations.splice(index, 1);
     const timer = setTimeout(() => commitDelete(conv.id), DELETE_UNDO_MS);
     pendingDeletes.set(conv.id, { conv, index, timer, wasActive });
@@ -1087,7 +1100,7 @@ export function render(root) {
       sub: conv.model ?? DASH,
       meta: conv.time,
       selected: conv.id === session.activeId,
-      onClick: () => selectConversation(conv.id),
+      onClick: () => (sidePanes.has(conv.id) ? sidePanes.get(conv.id).input.focus() : selectConversation(conv.id)),
     });
     row.setAttribute("aria-haspopup", "menu");
     row.title = "Right-click for more";
@@ -1152,7 +1165,6 @@ export function render(root) {
       messages.append(msg.role === "user" ? userBlock(msg, actions) : modelBlock(conv, msg, actions, regenerateReply));
     }
     wireCodeCopy(messages);
-    arenaButton.disabled = conv ? lastUserText(conv) === "" : true;
     if (session.stick) scroller.scrollTop = scroller.scrollHeight;
   }
 
@@ -1379,14 +1391,6 @@ export function render(root) {
     renderAll();
   }
 
-  function sendToArena() {
-    const conv = activeConv();
-    const question = conv ? lastUserText(conv) : "";
-    if (!question) return;
-    sessionStorage.setItem(ARENA_KEY, question);
-    location.hash = "#/arena";
-  }
-
   // Re-render the thread at most every 100 ms while a reply streams; the end renders once more.
   let streamRenderTimer = 0;
   function scheduleStreamRender() {
@@ -1534,8 +1538,238 @@ export function render(root) {
     return conv ? chatMarkdown(conv) : null;
   };
 
+  // Side chats ----------------------------------------------------------------
+  // A model whose engine writes more than one reply at once (slots of 2 or more) can run other chats
+  // beside the main one, each with its own messages, at the same time. One panel per extra slot.
+  const sidePanes = new Map(); // conv id -> pane
+
+  function sideRoom() {
+    return engine.mode !== "sim" && Boolean(loadedModel()) && !engine.loading ? Math.max(0, (engine.slots ?? 1) - 1) : 0;
+  }
+
+  function openSideChat() {
+    if (sidePanes.size >= sideRoom()) return;
+    const conv = makeConversation();
+    session.conversations.unshift(conv);
+    addSide(conv);
+    renderList();
+    sidePanes.get(conv.id)?.input.focus();
+  }
+
+  function addSide(conv) {
+    if (sidePanes.has(conv.id)) return;
+    const pane = { conv, run: null, renderTimer: 0 };
+    const titleNode = el("h1", "chat-title");
+    const close = button({ kind: "ghost", small: true, onClick: () => closeSide(conv.id) });
+    close.classList.add("chat-side-close");
+    close.setAttribute("aria-label", "Close this side chat");
+    close.title = "Close this side chat. It stays in your chat list.";
+    close.append(icon(CLOSE_ICON));
+    const sideHead = el("div", "chat-thread-head");
+    sideHead.append(titleNode, close);
+    const sideMessages = el("div", "chat-messages");
+    const sideScroller = el("div", "chat-scroll");
+    sideScroller.append(sideMessages);
+    pane.stick = true;
+    sideScroller.addEventListener("scroll", () => {
+      pane.stick = sideScroller.scrollHeight - sideScroller.scrollTop - sideScroller.clientHeight < STICK_PX;
+    });
+    const sideHint = el("p", "chat-hint");
+    const sideInput = el("textarea", "chat-input");
+    sideInput.rows = 2;
+    sideInput.placeholder = "Ask in this side chat";
+    sideInput.setAttribute("aria-label", "Side chat message");
+    const sideStop = button({ kind: "secondary", text: "Stop", onClick: () => pane.run?.stop() });
+    sideStop.prepend(icon(stop.querySelector(".chat-icon").innerHTML));
+    const sideSend = button({ kind: "primary", text: "Send", onClick: () => sendSide(pane) });
+    sideSend.append(icon(send.querySelector(".chat-icon").innerHTML));
+    const sideBar = el("div", "chat-composer-bar");
+    sideBar.append(el("span", "chat-count"), sideStop, sideSend);
+    const sideComposer = el("div", "chat-composer");
+    sideComposer.append(sideHint, sideInput, sideBar);
+    const sideWrap = el("div", "chat-composer-wrap");
+    sideWrap.append(sideComposer);
+    const node = module({ tag: "section", cls: "chat-thread chat-side", children: [sideHead, sideScroller, sideWrap] });
+    node.setAttribute("aria-label", "Side chat");
+    node.dataset.id = conv.id;
+    sideInput.addEventListener("input", () => updateSide(pane));
+    sideInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" && !event.shiftKey && !event.isComposing) {
+        event.preventDefault();
+        sendSide(pane);
+      }
+    });
+    Object.assign(pane, { node, titleNode, messages: sideMessages, scroller: sideScroller, hint: sideHint, input: sideInput, stop: sideStop, send: sideSend });
+    sidePanes.set(conv.id, pane);
+    if (!session.sideIds.includes(conv.id)) session.sideIds.push(conv.id);
+    threadArea.append(node);
+    if (session.activeId === conv.id) {
+      // The main thread was showing this chat: give the main thread a fresh one.
+      const fresh = makeConversation();
+      session.conversations.unshift(fresh);
+      selectConversation(fresh.id);
+    }
+    renderSide(pane);
+    updateSide(pane);
+    refresh();
+  }
+
+  function dropSide(id) {
+    const pane = sidePanes.get(id);
+    if (!pane) return;
+    pane.run?.stop();
+    clearTimeout(pane.renderTimer);
+    pane.node.remove();
+    sidePanes.delete(id);
+    session.sideIds = session.sideIds.filter((x) => x !== id);
+  }
+
+  function closeSide(id) {
+    const pane = sidePanes.get(id);
+    if (!pane) return;
+    dropSide(id);
+    if (engine.mode !== "sim" && pane.conv.messages?.length) saveChat(pane.conv);
+    renderList();
+    refresh();
+  }
+
+  function renderSide(pane) {
+    const conv = pane.conv;
+    pane.titleNode.textContent = conv.title;
+    pane.messages.replaceChildren();
+    const msgs = conv.messages ?? [];
+    if (msgs.length === 0) {
+      const empty = el("div", "chat-empty");
+      empty.append(el("p", "chat-empty-title", "Side chat"), el("p", "chat-empty-note", "Same model, its own conversation. It can answer while the main chat does."));
+      pane.messages.append(empty);
+    }
+    for (const msg of msgs) {
+      pane.messages.append(msg.role === "user" ? userBlock(msg, null) : modelBlock(conv, msg, null, () => retrySide(pane, msg)));
+    }
+    wireCodeCopy(pane.messages);
+    if (pane.stick) pane.scroller.scrollTop = pane.scroller.scrollHeight;
+  }
+
+  function scheduleSideRender(pane) {
+    if (pane.renderTimer) return;
+    pane.renderTimer = setTimeout(() => { pane.renderTimer = 0; renderSide(pane); }, 100);
+  }
+
+  function updateSide(pane) {
+    const model = loadedModel();
+    const busy = Boolean(pane.run);
+    let why = "";
+    if (engine.loading) why = "A model is loading.";
+    else if (!model) why = "No model loaded.";
+    else if ((engine.slots ?? 1) < 2) why = "This model answers one chat at a time now.";
+    pane.hint.textContent = why;
+    pane.hint.hidden = why === "";
+    pane.input.disabled = why !== "";
+    pane.stop.disabled = !busy;
+    pane.send.disabled = busy || why !== "" || pane.conv.messages === null || pane.input.value.trim() === "";
+  }
+
+  function updateSides() {
+    threadArea.classList.toggle("has-sides", sidePanes.size > 0);
+    const room = sideRoom();
+    splitButton.disabled = sidePanes.size >= room;
+    splitButton.title = !loadedModel() ? "Side chats need a loaded model."
+      : room === 0 ? "This model answers one chat at a time, so side chats are off. They turn on for a model started to answer several at once."
+        : sidePanes.size >= room ? `This model answers ${engine.slots} chats at once, and all of them are open.`
+          : "Open a side chat: the same model, its own conversation, answering at the same time.";
+    for (const pane of sidePanes.values()) updateSide(pane);
+  }
+
+  function sideOptions(conv) {
+    return { ...requestSettings(), system: conv.system ?? "" };
+  }
+
+  function startSide(pane, history, reply) {
+    const conv = pane.conv;
+    pane.stick = true;
+    const run = engine.sideReply(history, sideOptions(conv), {
+      text: (delta) => {
+        if (!reply.text && reply.thinkStartMs !== undefined && reply.thinkSeconds === undefined) {
+          reply.thinkSeconds = (performance.now() - reply.thinkStartMs) / 1000;
+          if (reply.thinkingOpen === undefined) reply.thinkingOpen = false;
+        }
+        reply.text += delta;
+        scheduleSideRender(pane);
+      },
+      thinking: (delta) => {
+        if (reply.thinkStartMs === undefined) reply.thinkStartMs = performance.now();
+        reply.thinking += delta;
+        scheduleSideRender(pane);
+      },
+      error: (message) => {
+        Object.assign(reply, { error: message, stoppedEarly: reply.text.trim() !== "" });
+      },
+      done: (stats) => {
+        if (pane.run === run) pane.run = null;
+        reply.pending = false;
+        if (!stats.failed && !reply.error) reply.stats = { at: Date.now(), words: wordCountOf(reply.text), ...stats };
+        if (engine.mode !== "sim") saveChat(conv);
+        if (sidePanes.get(conv.id) === pane) {
+          clearTimeout(pane.renderTimer);
+          pane.renderTimer = 0;
+          renderSide(pane);
+          updateSide(pane);
+        }
+        renderList();
+      },
+    });
+    if (!run) return false;
+    pane.run = run;
+    return true;
+  }
+
+  function sendSide(pane) {
+    const conv = pane.conv;
+    const text = pane.input.value.trim();
+    const model = loadedModel();
+    if (!text || !model || pane.run || conv.messages === null || pane.input.disabled) return;
+    const history = historyMessages(conv.messages);
+    const reply = { role: "model", model: model.name, text: "", thinking: "", pending: true, stats: null };
+    conv.messages.push({ role: "user", text }, reply);
+    if (!conv.model) conv.model = model.name;
+    if (conv.title === "New conversation") conv.title = titleFromText(text);
+    pane.input.value = "";
+    if (!startSide(pane, [...history, { role: "user", content: text }], reply)) {
+      conv.messages.splice(-2, 2);
+      pane.input.value = text;
+    }
+    renderSide(pane);
+    updateSide(pane);
+    renderList();
+  }
+
+  function retrySide(pane, msg) {
+    const conv = pane.conv;
+    const model = loadedModel();
+    const index = conv.messages.indexOf(msg);
+    if (!model || index < 0 || pane.run) return;
+    const earlier = conv.messages.slice(0, index);
+    if (!earlier.some((m) => m.role === "user")) return;
+    conv.messages.splice(index, 1);
+    const reply = { role: "model", model: model.name, text: "", thinking: "", pending: true, stats: null };
+    conv.messages.push(reply);
+    if (!startSide(pane, historyMessages(earlier), reply)) conv.messages.splice(-1, 1);
+    renderSide(pane);
+    updateSide(pane);
+  }
+
+  // Side chats open before a tab switch come back with the screen.
+  async function restoreSides() {
+    for (const id of [...session.sideIds]) {
+      const conv = session.conversations.find((c) => c.id === id);
+      if (!conv || !(await ensureMessages(conv)) || disposed) { session.sideIds = session.sideIds.filter((x) => x !== id); continue; }
+      addSide(conv);
+    }
+  }
+
   if (engine.mode === "sim" || session.loaded) {
     renderAll();
+    restoreSides();
   } else {
     newButton.disabled = true;
     renderAll();
@@ -1550,6 +1784,7 @@ export function render(root) {
       session.loaded = true;
       newButton.disabled = false;
       renderAll();
+      restoreSides();
     });
   }
 
@@ -1576,6 +1811,7 @@ export function render(root) {
     disposed = true;
     // Leaving the tab ends the reply. Stop first, while the listeners can still store its text.
     if (engine.streaming) engine.stop();
+    for (const pane of sidePanes.values()) pane.run?.stop();
     for (const [type, fn] of Object.entries(listeners)) engine.removeEventListener(type, fn);
     document.removeEventListener("keydown", onEscape);
     clearInterval(trendTimer);

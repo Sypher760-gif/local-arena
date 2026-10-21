@@ -19,6 +19,7 @@ from http.server import BaseHTTPRequestHandler
 
 MODEL = "fake-model-q4"
 MAX_CONTEXT = 32768
+SLOTS = 1  # /props total_slots: replies the engine says it writes at once (--slots)
 ANSWER = ("This is a fake reply from the test engine. It streams one word at a time so the speed meter, the "
           "stop button and the saved chat can all be tried without loading a real model. ") * 4
 
@@ -70,7 +71,7 @@ class Handler(BaseHTTPRequestHandler):
                                                     "meta": {"n_ctx": MAX_CONTEXT}}]})
         elif path == "/props":
             self._json({"default_generation_settings": {"n_ctx": MAX_CONTEXT, "params": {"n_predict": -1}},
-                        "total_slots": 1, "model_alias": MODEL})
+                        "total_slots": SLOTS, "model_alias": MODEL})
         elif path == "/health":
             self._json({"status": "ok"})
         elif path == "/slots":
@@ -202,10 +203,12 @@ if __name__ == "__main__":
     ap.add_argument("--wps", type=float, default=25.0)
     ap.add_argument("--think-words", type=int, default=6)
     ap.add_argument("--model", default=MODEL)
+    ap.add_argument("--slots", type=int, default=1, help="total_slots to report in /props")
     ap.add_argument("--echo-system", action="store_true",
                     help="begin each answer with [system: <the system prompt received>]")
     a = ap.parse_args()
     MODEL = a.model
+    SLOTS = a.slots
     Handler.wps, Handler.think_words, Handler.echo_system = a.wps, a.think_words, a.echo_system
     print("Fake engine on http://127.0.0.1:%d (model %s)" % (a.port, MODEL), flush=True)
     try:

@@ -196,7 +196,7 @@ def make_llama_stub(busy):
                 self.send({"object": "list", "data": [{"id": "llama-test.gguf", "object": "model",
                                                        "meta": {"n_ctx": 4096}}]})
             elif self.path == "/props":
-                self.send({"default_generation_settings": {"n_ctx": 8192}})
+                self.send({"default_generation_settings": {"n_ctx": 8192}, "total_slots": 3})
             elif self.path == "/slots":
                 self.send([{"id": 0, "is_processing": busy[0]}])
             else:
@@ -225,9 +225,9 @@ def check_status_up():
     expect(body["warmup"] is None, "warmup before any warm-up probe: %r" % body["warmup"])
     expect(body["gatewayVersion"] == "0.1.0", "gatewayVersion %r" % body["gatewayVersion"])
     eng = body["engine"]
-    expect(set(eng) == {"reachable", "kind", "model", "maxContext", "version"}, "engine keys %s" % sorted(eng))
+    expect(set(eng) == {"reachable", "kind", "model", "maxContext", "version", "slots"}, "engine keys %s" % sorted(eng))
     expect(eng == {"reachable": True, "kind": "strata", "model": MODEL, "maxContext": 32768,
-                   "version": "fake-0.0"}, "engine %r" % eng)
+                   "version": "fake-0.0", "slots": 1}, "engine %r" % eng)
     expect(set(body["live"]) == set(server.LIVE_EMPTY), "live keys %s" % sorted(body["live"]))
     expect(body["live"]["state"] == "idle", "live state %r" % body["live"]["state"])
     gpu = body["gpu"]
@@ -240,7 +240,7 @@ def check_status_down():
     status, body, elapsed = timed_status()
     expect(status == 200, "status %s when engine is down (must not be an error)" % status)
     expect(body["engine"] == {"reachable": False, "kind": None, "model": None, "maxContext": None,
-                              "version": None}, "engine %r" % body["engine"])
+                              "version": None, "slots": None}, "engine %r" % body["engine"])
     expect(body["live"]["state"] is None, "live state %r" % body["live"]["state"])
     expect(elapsed < 3.0, "took %.2fs" % elapsed)
     return "%.2fs" % elapsed
@@ -569,7 +569,7 @@ def check_llama_mapping():
     try:
         _, body, _ = timed_status()
         expect(body["engine"] == {"reachable": True, "kind": "llama.cpp", "model": "llama-test.gguf",
-                                  "maxContext": 8192, "version": None}, "engine %r" % body["engine"])
+                                  "maxContext": 8192, "version": None, "slots": 3}, "engine %r" % body["engine"])
         expect(body["live"]["state"] == "idle", "idle state %r" % body["live"]["state"])
         busy[0] = True
         _, body, _ = timed_status()
@@ -577,7 +577,7 @@ def check_llama_mapping():
     finally:
         stub.shutdown()
         stub.server_close()
-    return "kind, model, maxContext from /props, slot state"
+    return "kind, model, maxContext and slots from /props, slot state"
 
 
 def check_proxy_engine_down():

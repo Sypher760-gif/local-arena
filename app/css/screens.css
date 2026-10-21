@@ -54,7 +54,7 @@
 .chat-cols.list-collapsed { grid-template-columns: 0px 8px minmax(0, 1fr) 8px var(--chat-meters-w, 336px); }
 .chat-cols.meters-collapsed { grid-template-columns: var(--chat-list-w, 248px) 8px minmax(0, 1fr) 8px 0px; }
 .chat-cols.list-collapsed.meters-collapsed { grid-template-columns: 0px 8px minmax(0, 1fr) 8px 0px; }
-.chat-cols > aside, .chat-cols > section { min-width: 0; }
+.chat-cols > aside, .chat-cols > section, .chat-cols > .chat-thread-area { min-width: 0; }
 .chat-cols.list-collapsed > .chat-list, .chat-cols.meters-collapsed > .meters {
   visibility: hidden; opacity: 0; overflow: hidden; padding: 0; border-width: 0;
 }

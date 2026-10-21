@@ -166,6 +166,7 @@ Then run `node tools/ui_check.mjs --only 30-chip-after-load`.
 | 92-tests-history | Start waits for saved IDs; navigation ignores stale history; old runs survive; full questions and answers are stored |
 | 93-chat-save-owner | A reply finishes into its original chat after switching chats; system-only edits persist; queued deletion stays with its chat |
 | 94-arena-model-identity | The selected live catalogue model receives both requests and the vote records the same identities |
+| 96-chat-side | One slot: the side-chat button is off and says why. Two slots: a side chat answers at the same time as the main chat, Stop ends only its own reply, and both chats are saved |
 | 95-release-layout | Demo screens fit at 1440 and 1024 pixels; layout screenshots are saved under data/test-artifacts/shots |
 
 Check 33 also clicks Try again after recovery and verifies a new request. Each verification step retains its complete output under data/test-artifacts/verify. The browser suite has a 10-minute total budget and a 90-second per-check budget. Headless Chrome runs with GPU rendering disabled. All subprocesses are hidden on Windows.

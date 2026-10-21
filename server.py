@@ -247,7 +247,10 @@ def status():
         live = dict(LIVE_EMPTY)
 
     kind = ENGINE_KIND_OVERRIDE if ENGINE_KIND_OVERRIDE else kind
-    engine = dict(reachable=kind is not None, kind=kind, **engine)
+    # Replies the engine writes at once: llama.cpp, NInfer and Strata all state it as /props total_slots.
+    slots_n = props.get("total_slots") if isinstance(props, dict) else None
+    slots_n = slots_n if kind is not None and isinstance(slots_n, int) and not isinstance(slots_n, bool) and slots_n > 0 else None
+    engine = dict(reachable=kind is not None, kind=kind, slots=slots_n, **engine)
     st = {
         "gatewayVersion": VERSION,
         "codeStamp": CODE_STAMP,

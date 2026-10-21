@@ -111,6 +111,8 @@ class LiveEngine extends EventTarget {
     this.warmup = null;           // null, or { tokensPerSecond, usual, slow } from the gateway
     this.loading = null;          // null, or { modelId, direction, progress } while a switch runs
     this.streaming = false;
+    this.slots = 1;               // replies the loaded model can write at once (the engine's slots); 1 when it does not say
+    this._sides = new Set();      // side replies in progress (sideReply), each { stop }
     this.maxContext = null;
     this.contextTokens = 0;
     this.gpuUsedGB = 0;
@@ -167,6 +169,7 @@ class LiveEngine extends EventTarget {
   async _switch(body, direction, modelId) {
     if (this.loading) throw new Error("A model is already loading. Wait for it to finish.");
     this.stop();
+    for (const side of [...this._sides]) side.stop();
     this.loading = { modelId, direction, progress: 0 };
     this.emit("progress", { ...this.loading });
     this.emit("change");
@@ -245,33 +248,7 @@ class LiveEngine extends EventTarget {
     if (!this.loadedModelId || this.loading || this.streaming) return false;
     // The model's own settings (Models > Settings) win over the screen's for every key they set. Its system
     // prompt is used when the screen has none of its own (Chat's per-chat prompt, an Arena side's).
-    const makeBody = () => {
-      const tune = this.replyTuning ?? {};
-      const messages = toMessages(input, opts.system || tune.system);
-      const body = {
-        model: this.loadedModelId,
-        messages,
-        stream: true,
-        stream_options: { include_usage: true },
-        temperature: tune.temperature ?? opts.temperature,
-        top_p: tune.topP ?? opts.topP,
-        // Never ask for more than the loaded model's whole context: some engines refuse that.
-        max_tokens: this.maxContext ? Math.min(opts.maxTokens ?? 1024, this.maxContext) : (opts.maxTokens ?? 1024),
-        reasoning_effort: opts.thinking ?? "none",
-      };
-      // A thinking cap ends a thinking loop: at the cap the engine closes the thinking and the model answers.
-      // Only sent while thinking (NInfer reads it; engines that do not know it ignore an unknown field).
-      if (opts.thinkingBudget > 0 && (opts.thinking ?? "none") !== "none") body.thinking_budget = opts.thinkingBudget;
-      // The model's own value is sent even at 0; the screen's only when it asks for a penalty.
-      if (Number.isFinite(tune.presencePenalty)) body.presence_penalty = tune.presencePenalty;
-      else if (opts.presencePenalty > 0) body.presence_penalty = opts.presencePenalty;
-      if (Number.isFinite(tune.frequencyPenalty)) body.frequency_penalty = tune.frequencyPenalty;
-      if (Number.isInteger(tune.topK)) body.top_k = tune.topK;
-      if (Number.isFinite(tune.minP)) body.min_p = tune.minP;
-      if (Number.isInteger(tune.seed)) body.seed = tune.seed;
-      if (Array.isArray(tune.stop) && tune.stop.length) body.stop = tune.stop;
-      return body;
-    };
+    const makeBody = () => this._body(input, opts);
     const run = {
       modelId: this.loadedModelId,
       tuningKey: this._tuningKey,
@@ -305,6 +282,140 @@ class LiveEngine extends EventTarget {
     this.emit("change");
     this._stream(run, makeBody);
     return true;
+  }
+
+  // The request body: the screen's settings, with the loaded model's own settings winning.
+  _body(input, opts = {}) {
+    const tune = this.replyTuning ?? {};
+    const messages = toMessages(input, opts.system || tune.system);
+    const body = {
+      model: this.loadedModelId,
+      messages,
+      stream: true,
+      stream_options: { include_usage: true },
+      temperature: tune.temperature ?? opts.temperature,
+      top_p: tune.topP ?? opts.topP,
+      // Never ask for more than the loaded model's whole context: some engines refuse that.
+      max_tokens: this.maxContext ? Math.min(opts.maxTokens ?? 1024, this.maxContext) : (opts.maxTokens ?? 1024),
+      reasoning_effort: opts.thinking ?? "none",
+    };
+    // A thinking cap ends a thinking loop: at the cap the engine closes the thinking and the model answers.
+    // Only sent while thinking (NInfer reads it; engines that do not know it ignore an unknown field).
+    if (opts.thinkingBudget > 0 && (opts.thinking ?? "none") !== "none") body.thinking_budget = opts.thinkingBudget;
+    // The model's own value is sent even at 0; the screen's only when it asks for a penalty.
+    if (Number.isFinite(tune.presencePenalty)) body.presence_penalty = tune.presencePenalty;
+    else if (opts.presencePenalty > 0) body.presence_penalty = opts.presencePenalty;
+    if (Number.isFinite(tune.frequencyPenalty)) body.frequency_penalty = tune.frequencyPenalty;
+    if (Number.isInteger(tune.topK)) body.top_k = tune.topK;
+    if (Number.isFinite(tune.minP)) body.min_p = tune.minP;
+    if (Number.isInteger(tune.seed)) body.seed = tune.seed;
+    if (Array.isArray(tune.stop) && tune.stop.length) body.stop = tune.stop;
+    return body;
+  }
+
+  // A reply beside the main one, for a model that writes more than one at once (slots of 2 or more).
+  // It reports through its own callbacks ({ text, thinking, error, done }) and leaves the main reply, the
+  // meters and `streaming` alone. Returns null when it cannot start, else a handle with stop().
+  sideReply(input, opts, on = {}) {
+    if (!this.loadedModelId || this.loading || this.slots < 2) return null;
+    const controller = new AbortController();
+    const start = performance.now();
+    const t = { first: null, last: null, firstReason: null, firstContent: null, estimate: 0, reasoning: 0, usage: null, sawEnd: false };
+    let ended = false;
+    const stats = (failed) => {
+      const tokens = t.usage?.completion_tokens ?? t.estimate;
+      const speedSeconds = t.first === null ? 0 : Math.max(0, (t.last - t.first) / 1000);
+      return {
+        failed,
+        seconds: (performance.now() - start) / 1000,
+        tokens,
+        speedSeconds,
+        tokensPerSecond: speedSeconds > 0 ? tokens / speedSeconds : 0,
+        firstTokenSeconds: t.first === null ? null : (t.first - start) / 1000,
+        thinkingSeconds: t.firstReason === null ? 0 : Math.max(0, ((t.firstContent ?? performance.now()) - t.firstReason) / 1000),
+        thinkingTokens: t.reasoning,
+      };
+    };
+    const side = {
+      stop: () => {
+        if (ended) return;
+        finish(false);
+        controller.abort();
+      },
+    };
+    const finish = (failed) => {
+      if (ended) return;
+      ended = true;
+      this._sides.delete(side);
+      on.done?.(stats(failed));
+    };
+    const piece = (text, reasoning) => {
+      const now = performance.now();
+      const count = estimateTokens(text);
+      t.first = t.first ?? now;
+      t.last = now;
+      t.estimate += count;
+      if (reasoning) {
+        t.firstReason = t.firstReason ?? now;
+        t.reasoning += count;
+        on.thinking?.(text);
+      } else {
+        t.firstContent = t.firstContent ?? now;
+        on.text?.(text);
+      }
+    };
+    const line = (raw) => {
+      if (!raw.startsWith("data:")) return;
+      const payload = raw.slice(5).trim();
+      if (payload === "") return;
+      if (payload === "[DONE]") { t.sawEnd = true; return; }
+      let chunk;
+      try { chunk = JSON.parse(payload); } catch { throw new ReplyError(ENGINE_LOST); }
+      if (chunk.usage) t.usage = chunk.usage;
+      const choice = chunk.choices?.[0];
+      if (!choice) return;
+      if (choice.delta?.reasoning_content) piece(choice.delta.reasoning_content, true);
+      if (ended) return;
+      if (choice.delta?.content) piece(choice.delta.content, false);
+      if (choice.finish_reason) t.sawEnd = true;
+    };
+    this._sides.add(side);
+    (async () => {
+      try {
+        await this._tuningPromise;
+        const res = await fetch("/v1/chat/completions", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(this._body(input, opts)),
+          signal: controller.signal,
+        });
+        if (!res.ok) throw new ReplyError(await httpErrorMessage(res));
+        if (!res.body) throw new ReplyError(ENGINE_LOST);
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let pending = "";
+        for (;;) {
+          const { value, done } = await reader.read();
+          if (ended) return;
+          pending += decoder.decode(value, { stream: !done });
+          const lines = pending.split("\n");
+          pending = done ? "" : lines.pop();
+          for (const raw of lines) {
+            line(raw);
+            if (ended) return;
+          }
+          if (done) break;
+        }
+        if (!t.sawEnd) throw new ReplyError(REPLY_CUT_OFF);
+        finish(false);
+      } catch (error) {
+        if (ended) return;  // stopped: the abort lands here
+        on.error?.(error instanceof ReplyError ? error.message : ENGINE_LOST);
+        finish(true);
+        this._poll();
+      }
+    })();
+    return side;
   }
 
   // Ends the reply now. Emits 'done' with finishReason "cancel" and the text so far.
@@ -358,6 +469,7 @@ class LiveEngine extends EventTarget {
       this._tokenScale = savedTokenScale(this.loadedModelId) ?? 1;
     }
     this.maxContext = this.reachable && info.maxContext ? info.maxContext : null;
+    this.slots = this.reachable && Number.isInteger(info.slots) && info.slots > 0 ? info.slots : 1;
     // Screens read maxContext from the model object, so carry the engine's figure on it.
     this.loadedModel = this.loadedModelId
       ? { ...splitModelId(this.loadedModelId), maxContext: this.maxContext }
